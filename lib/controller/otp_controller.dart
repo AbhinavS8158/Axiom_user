@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../screens/Home/home_screen.dart';
+import '../screens/home/home_screen.dart';
 
 class OtpController extends GetxController {
   final String initialOtp;

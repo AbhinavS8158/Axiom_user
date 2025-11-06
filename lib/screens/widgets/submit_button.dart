@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:user/screens/utils/appcolor.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class SubmitButton extends StatelessWidget {
   final String label;
@@ -16,7 +16,7 @@ class SubmitButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColor.CustomNextButton_shadow,
+        backgroundColor: AppColor.checkcircle,
         padding: const EdgeInsets.symmetric(vertical: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),

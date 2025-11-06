@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:user/screens/utils/appcolor.dart';
+import 'package:user/screens/utils/app_color.dart';
+import 'package:user/screens/widgets/progress_line.dart';
 
 import '../controller/onboarding_controller.dart';
 import 'widgets/custom_next_button.dart';
@@ -28,6 +29,8 @@ class OnboardingScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 50,),
+            ProgressLine(),
             Expanded(
               child: PageView.builder(
                 controller: controller.pageController,
@@ -55,6 +58,7 @@ class OnboardingScreen extends StatelessWidget {
                 },
               ),
             ),
+           
             const SizedBox(height: 20),
             Obx(() => CustomNextButton(
                   label: controller.currentIndex.value == controller.contentList.length - 1

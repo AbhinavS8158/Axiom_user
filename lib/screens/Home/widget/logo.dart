@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:user/screens/Profile/profile.dart';
+import 'package:user/screens/chat/chat.dart';
 
 class Logo extends StatelessWidget {
   const Logo({super.key});
@@ -26,15 +26,19 @@ class Logo extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: (){
-                  Get.to(Profile());
-                },
-                child: CircleAvatar(
-                  backgroundColor: Colors.black,
-                  child: Icon(Icons.person_outline, color: Colors.white),
-                ),
-              ),
+              // InkWell(
+              //   onTap: (){
+              //     Get.to(Profile());
+              //   },
+              //   child: Icon(
+              //     icons.message
+              //     backgroundColor: Colors.black,
+              //     child: Icon(Icons.person_outline, color: Colors.white),
+              //   ),
+              // ),
+              IconButton(onPressed: (){
+                Get.to(Chat());
+              }, icon:Icon(Icons.chat_bubble_outline_rounded))
             ],
           ),
         );

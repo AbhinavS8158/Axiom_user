@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/screens/login_screen.dart';
 
-import '../model/onboard.dart';
+import '../model/onboard_model.dart';
 
 class OnboardingController extends GetxController {
   final PageController pageController = PageController();

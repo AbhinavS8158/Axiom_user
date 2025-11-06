@@ -1,3 +1,4 @@
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/controller/tabview_controller.dart';
@@ -7,82 +8,53 @@ class TabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     final TabControllerX tabController = Get.put(TabControllerX());
 
-    return 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal:20 ,vertical: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey[300]!),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                children: [
-               
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        tabController.changeTab(0); 
-                      },
-                      child: Obx(() {
-                       
-                        return Container(
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          decoration: BoxDecoration(
-                            color: tabController.selectedIndex.value == 0
-                                ? Colors.grey[200]
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            'RECENTS',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: tabController.selectedIndex.value == 0
-                                  ? Colors.black
-                                  : Colors.grey[600],
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                 
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        tabController.changeTab(1); 
-                      },
-                      child: Obx(() {
-                        return Container(
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          decoration: BoxDecoration(
-                            color: tabController.selectedIndex.value == 1
-                                ? Colors.grey[200]
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            'ALL',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: tabController.selectedIndex.value == 1
-                                  ? Colors.black
-                                  : Colors.grey[600],
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+      child: Obx(() {
+        return CustomSlidingSegmentedControl<int>(
+          fixedWidth: 100,
+          initialValue: tabController.selectedIndex.value,
+          children: const {
+            0: Text(
+              'RENT',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
               ),
             ),
-          );
+            1: Text(
+              'BUY',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+            2: Text(
+              'PG',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          },
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: Colors.grey[300]!),
+          ),
+          thumbDecoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(30),
+          ),
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+          onValueChanged: (value) {
+            tabController.changeTab(value);
+          },
+        );
+      }),
+    );
   }
 }

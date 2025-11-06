@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:user/screens/utils/appcolor.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class CustomNextButton extends StatelessWidget {
   final String label;
@@ -13,8 +13,8 @@ class CustomNextButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onTap,
-    this.backgroundColor = AppColor.CustomNextButton_bg,
-    this.textColor =  AppColor.CustomNextButton_text,
+    this.backgroundColor = AppColor.customnextbuttonbg,
+    this.textColor =  AppColor.customnextbuttontext,
     this.borderRadius = 12.0,
     this.padding = const EdgeInsets.symmetric(vertical: 12),
   });
@@ -30,7 +30,7 @@ class CustomNextButton extends StatelessWidget {
         decoration: BoxDecoration(
            boxShadow: [
             BoxShadow(
-              color: AppColor.CustomNextButton_shadow,
+              color: AppColor.customnextbuttonshadow,
               blurRadius: 6,
               offset: const Offset(0, 3),
             ),

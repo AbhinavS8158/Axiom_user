@@ -1,43 +1,13 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:user/screens/utils/appcolor.dart';
-
-// class Profile extends StatelessWidget {
-//   const Profile({super.key});
-
-//   get controller => null;
-
-//   @override
-//   Widget build(BuildContext context) {
-
-//        User?user=FirebaseAuth.instance.currentUser;
-//     return Scaffold(
-//       backgroundColor: AppColor.bg,
-//       body: SafeArea(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Text(user!=null&&user.displayName!=null?'Welcome ${user.displayName}':'Welcome Guest'),
-//             Center(child: TextButton(
-//   onPressed: () => controller.logout(),
-//   child: const Text('Logout'),
-// )
-// ),
-
-// ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/controller/login_controller.dart';
-import 'package:user/screens/Profile/widget/dashbord.dart';
+import 'package:user/model/dashboad_model.dart';
+import 'package:user/screens/profile/widget/dashbord.dart';
+import 'package:user/screens/property/property_list.dart';
 
-import '../../model/dashboad.dart';
+
 
 class Profile extends StatelessWidget {
   @override
@@ -148,10 +118,7 @@ class Profile extends StatelessWidget {
                   ],
                 ),
               ),
-
-              SizedBox(height: 24),
-
-              // Dashboard Grid
+              SizedBox(height: 24),              // Dashboard Grid
               Expanded(
                 child: GridView.count(
                   physics: NeverScrollableScrollPhysics(),
@@ -167,7 +134,7 @@ class Profile extends StatelessWidget {
                         icon: Icons.business,
                         color: Color(0xFFFFF8E1),
                         borderColor: Colors.amber,
-                        onTap: () {},
+                        onTap: () =>Get.to(()=>PropertyList()),
                       ),
                     ),
 

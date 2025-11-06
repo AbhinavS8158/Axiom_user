@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:user/controller/login_controller.dart';
-import 'package:user/screens/utils/appcolor.dart';
+import 'package:user/screens/bottomnav/bottom_nav.dart';
+import 'package:user/screens/utils/app_color.dart';
 
-import 'Home/home_screen.dart';
 import 'widgets/country_code_dropdown.dart';
 import 'widgets/submit_button.dart';
 import 'widgets/title_text.dart';
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
 
                   Row(
                     children: [
-                      Icon(Icons.check_circle, color: AppColor.check_circle),
+                      Icon(Icons.check_circle, color: AppColor.checkcircle),
                       const SizedBox(width: 8),
                       const Text(
                         'Easy connect with seller',
@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   const Row(
                     children: [
-                      Icon(Icons.check_circle, color: AppColor.check_circle),
+                      Icon(Icons.check_circle, color: AppColor.checkcircle),
                       SizedBox(width: 8),
                       Text(
                         'Personalized experience',
@@ -128,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (_) =>  HomeScreen(),
+                                builder: (_) =>  BottomNav(),
                               ),
                               (route) => false, 
                             );

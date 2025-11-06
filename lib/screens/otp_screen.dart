@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:user/screens/utils/appcolor.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 import '../controller/otp_controller.dart';
 import 'widgets/otp_input_feild.dart';

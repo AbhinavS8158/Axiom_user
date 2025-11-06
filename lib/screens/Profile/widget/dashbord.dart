@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:user/model/dashboad.dart';
+import 'package:user/model/dashboad_model.dart';
 
 class Dashbord extends StatelessWidget {
   final DashboadModel model;
@@ -8,6 +8,7 @@ class Dashbord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: model.onTap,
       child: Container(
         decoration: BoxDecoration(
           color:model. color,
@@ -26,8 +27,7 @@ class Dashbord extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      onTap: model.onTap
+      )
     );
   }
 }
