@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:user/controller/all_property_controller.dart';
 import 'package:user/screens/search/filter_bottom_sheet.dart';
 import 'package:user/screens/search/search_items.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -20,10 +21,10 @@ class SearchScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColor.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: AppColor.black.withOpacity(0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 2),
                   ),
@@ -31,9 +32,9 @@ class SearchScreen extends StatelessWidget {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: AppColor.grey1,
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.grey[300]!),
+                  border: Border.all(color: AppColor.grey3!),
                 ),
                 child: Row(
                   children: [
@@ -45,7 +46,7 @@ class SearchScreen extends StatelessWidget {
                         ),
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: const Icon(Icons.search, color: Colors.white, size: 24),
+                      child: const Icon(Icons.search, color: AppColor.white, size: 24),
                     ),
                     const SizedBox(width: 12),
                     Expanded(

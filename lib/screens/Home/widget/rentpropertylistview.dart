@@ -15,7 +15,7 @@ class Rentpropertylistview extends StatelessWidget {
         final visibleProperties = controller.propertyList.where((p) {
           // Hide properties where status == 2 or 'unavailable'
           final status = p.status.toString().trim().toLowerCase();
-          return !(status == '2' || status == 'unavailable');
+          return (status == '1' );
         }).toList(); 
 
         if (visibleProperties.isEmpty) {

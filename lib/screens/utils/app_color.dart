@@ -19,6 +19,7 @@ static final Color grey =Colors.grey;
 static final Color grey1 =Colors.grey.shade100;
 static final Color grey2 =Colors.grey.shade700;
 static final Color grey3 =Colors.grey.shade300;
+static final Color blueAccent=Colors.blueAccent;
 
 
 

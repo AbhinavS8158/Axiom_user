@@ -17,7 +17,9 @@ class Property {
   final String propertyType;
   final String collectiontype;
   final String powerbackup;
+  final String constructionstatus;
   final List<Map<String, dynamic>> amenities;
+  final String food;
 
   Property({
     required this.id,
@@ -37,6 +39,8 @@ class Property {
     required this.collectiontype,
     required this.powerbackup,
     required this.amenities,
+    required this.constructionstatus,
+    required this.food,
   });
 
   /// ✅ Convert to JSON
@@ -58,6 +62,8 @@ class Property {
       'collectiontype': collectiontype,
       'powerbackup': powerbackup,
       'amenities': amenities,
+      'constructionstaus':constructionstatus,
+      'food':food,
     };
   }
 
@@ -99,6 +105,8 @@ class Property {
       collectiontype: data['collectiontype'] ?? '',
       powerbackup: data['powerbackup'] ?? '',
       amenities: parsedAmenities,
+      constructionstatus:  data['constructionstatus']??'',
+      food: data['food']??'',
     );
   }
 }

@@ -26,59 +26,59 @@ class Details extends StatelessWidget {
         slivers: [
           // 🏞 App Bar with Image Carousel
           SliverAppBar(
-  expandedHeight: 300,
-  pinned: true,
-  backgroundColor: AppColor.bg,
-  elevation: 0,
-  leading: circleButton(
-    icon: Icons.arrow_back,
-    iconColor: AppColor.black,
-    onPressed: () => Navigator.pop(context),
-  ),
-  actions: [
-    Obx(() {
-      final isFav = favController.isFavorite(property.id);
-      return circleButton(
-        icon: isFav ? Icons.favorite : Icons.favorite_border,
-        iconColor: isFav ? AppColor.fav : Colors.black, // ❤️ icon changes color only
-        onPressed: () => favController.toggleFavorite(property),
-      );
-    }),
-  ],
-  flexibleSpace: FlexibleSpaceBar(
-    background: Stack(
-      children: [
-        // 🖼 Image Carousel
-        ImageCarousel(imageUrls: property.imageUrl),
-
-        // 🏷 Availability Badge
-        Positioned(
-          top: 60,
-          right: 15,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: isUnavailable
-                  ? AppColor.fav
-                  : AppColor.checkcircle,
-              borderRadius: BorderRadius.circular(20),
+            expandedHeight: 300,
+            pinned: true,
+            backgroundColor: AppColor.bg,
+            elevation: 0,
+            leading: circleButton(
+              icon: Icons.arrow_back,
+              iconColor: AppColor.black,
+              onPressed: () => Navigator.pop(context),
             ),
-            child: Text(
-              isUnavailable ? 'UNAVAILABLE' : 'AVAILABLE',
-              style: const TextStyle(
-                color: AppColor.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
+            actions: [
+              Obx(() {
+                final isFav = favController.isFavorite(property.id);
+                return circleButton(
+                  icon: isFav ? Icons.favorite : Icons.favorite_border,
+                  iconColor: isFav ? AppColor.fav : Colors.black,
+                  onPressed: () => favController.toggleFavorite(property),
+                );
+              }),
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                children: [
+                  // 🖼 Image Carousel
+                  ImageCarousel(imageUrls: property.imageUrl),
+
+                  // 🏷 Availability Badge
+                  Positioned(
+                    top: 60,
+                    right: 15,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color:
+                            isUnavailable ? AppColor.fav : AppColor.checkcircle,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        isUnavailable ? 'UNAVAILABLE' : 'AVAILABLE',
+                        style: const TextStyle(
+                          color: AppColor.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ),
-      ],
-    ),
-  ),
-        
-),
-        
 
           // 📋 Main Content
           SliverToBoxAdapter(
@@ -102,7 +102,7 @@ class Details extends StatelessWidget {
                     children: [
                       Text(
                         property.price,
-                        style:  TextStyle(
+                        style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: AppColor.blue,
@@ -110,7 +110,7 @@ class Details extends StatelessWidget {
                       ),
                       Text(
                         '/Month',
-                        style: TextStyle(fontSize: 16, color:AppColor.grey),
+                        style: TextStyle(fontSize: 16, color: AppColor.grey),
                       ),
                     ],
                   ),
@@ -150,7 +150,7 @@ class Details extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // 📝 Description
-                  _sectionTitle('Description'),
+                  _sectionTitle('Description',Icons.notes),
                   Text(
                     property.about,
                     style: TextStyle(
@@ -161,8 +161,39 @@ class Details extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
+                  // 🏗 Construction Status (only for sell_property)
+                  if (property.collectiontype == 'sell_property') ...[
+                    _sectionTitle("Construction Status",Icons.sync),
+                    const SizedBox(height: 8),
+                    Text(
+                      property.constructionstatus,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: AppColor.grey2,
+                        height: 1.5,
+                      ),
+                    ),
+                   
+                  ],
+                   if (property.collectiontype == 'pg_property') ...[
+                    _sectionTitle("Food availbility",Icons.restaurant),
+                    const SizedBox(height: 8),
+                    Text(
+                      property.food,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: AppColor.grey2,
+                        height: 1.5,
+                      ),
+                    ),
+                   
+                  ],
+
+
+                  const SizedBox(height: 24),
+
                   // ⚡ Power Backup
-                  _sectionTitle('Power Backup'),
+                  _sectionTitle('Power Backup',Icons.electric_bolt),
                   Text(
                     property.powerbackup,
                     style: TextStyle(
@@ -174,23 +205,21 @@ class Details extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // ✨ Amenities
-                  _sectionTitle('Amenities'),
+                  _sectionTitle('Amenities',Icons.category),
                   const SizedBox(height: 12),
                   AmenitiesWidget(property: property),
                   const SizedBox(height: 24),
 
                   // 📍 Location
-                  _sectionTitle('Location'),
+                  _sectionTitle('Location',Icons.location_on),
                   const SizedBox(height: 12),
                   _buildLocationCard(),
-
                   const SizedBox(height: 24),
 
                   // 👤 Owner Section
-                  _sectionTitle('Contact Owner'),
+                  _sectionTitle('Contact Owner',Icons.person),
                   const SizedBox(height: 12),
                   _buildOwnerSection(),
-
                   const SizedBox(height: 100),
                 ],
               ),
@@ -208,13 +237,20 @@ class Details extends StatelessWidget {
   Widget _divider() => Container(height: 40, width: 1, color: Colors.grey[300]);
 
   // 🔹 Section Title Widget
-  Widget _sectionTitle(String title) => Text(
-        title,
-        style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      );
+  Widget _sectionTitle(String title, IconData icon) => Row(
+  children: [
+    Icon(icon, size: 24),
+    const SizedBox(width: 8), // space between icon and text
+    Text(
+      title,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ],
+);
+
 
   // 🔹 Location Map Placeholder
   Widget _buildLocationCard() {
@@ -230,10 +266,7 @@ class Details extends StatelessWidget {
           children: [
             Icon(Icons.location_on, size: 48, color: AppColor.grey3),
             const SizedBox(height: 8),
-            Text(
-              'Map View',
-              style: TextStyle(color: AppColor.grey3),
-            ),
+            Text('Map View', style: TextStyle(color: AppColor.grey3)),
             Text(
               property.location,
               style: TextStyle(color: AppColor.grey3),
@@ -264,31 +297,25 @@ class Details extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:  [
-                Text(
+              children: [
+                const Text(
                   'Real Estate Agent',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   'Contact for property details',
-                  style: TextStyle(
-                    color: AppColor.grey,
-                    fontSize: 14,
-                  ),
+                  style: TextStyle(color: AppColor.grey, fontSize: 14),
                 ),
               ],
             ),
           ),
           IconButton(
-            icon:  Icon(Icons.phone, color: AppColor.blue),
+            icon: Icon(Icons.phone, color: AppColor.blue),
             onPressed: () {},
           ),
           IconButton(
-            icon:  Icon(Icons.message, color: AppColor.blue),
+            icon: Icon(Icons.message, color: AppColor.blue),
             onPressed: () {},
           ),
         ],

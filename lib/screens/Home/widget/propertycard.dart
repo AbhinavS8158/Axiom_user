@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/model/property_card_model.dart';
 import 'package:user/screens/details/details.dart';
+import 'package:user/screens/home/widget/collection_type_banner.dart';
 
 class PropertyCard extends StatelessWidget {
   final Property property;
@@ -100,12 +101,19 @@ class PropertyCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      property.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          property.title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                       const Spacer(),
+                        CollectionTypeBanner(collectionType: property.collectiontype)
+
+                      ],
                     ),
                     const SizedBox(height: 5),
                     Row(
@@ -135,7 +143,7 @@ class PropertyCard extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                      isSellProperty?Text("only"):
+                      isSellProperty?Text("/- only"):
                           const Text(
                             '/Month',
                             style: TextStyle(
