@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/controller/all_property_controller.dart';
 import 'package:user/screens/home/widget/propertycard.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class SearchItems extends StatelessWidget {
   SearchItems({super.key});
@@ -18,10 +19,10 @@ class SearchItems extends StatelessWidget {
       }).toList();
 
       if (visibleProperties.isEmpty) {
-        return const Center(
+        return  Center(
           child: Text(
             'No properties found.',
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+            style: TextStyle(fontSize: 16, color: AppColor.grey),
           ),
         );
       }

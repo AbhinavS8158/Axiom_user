@@ -21,7 +21,7 @@ Widget buildDurationSelector() {
                 child: Text(
                   duration,
                   style: TextStyle(
-                    color: selected ? Colors.white : Colors.black87,
+                    color: selected ? AppColor.white : AppColor.black,
                   ),
                 ),
               ),

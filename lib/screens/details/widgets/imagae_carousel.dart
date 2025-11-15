@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:user/controller/image_carousel_controller.dart'; // adjust the path
+import 'package:user/controller/image_carousel_controller.dart';
+import 'package:user/screens/utils/app_color.dart'; // adjust the path
 
 class ImageCarousel extends StatelessWidget {
   final List<String> imageUrls;
@@ -13,9 +14,9 @@ class ImageCarousel extends StatelessWidget {
 
     if (imageUrls.isEmpty) {
       return Container(
-        color: Colors.grey[300],
-        child: const Center(
-          child: Icon(Icons.image, size: 80, color: Colors.grey),
+        color: AppColor.grey3,
+        child:  Center(
+          child: Icon(Icons.image, size: 80, color: AppColor.grey),
         ),
       );
     }
@@ -43,9 +44,9 @@ class ImageCarousel extends StatelessWidget {
                 );
               },
               errorBuilder: (context, error, stack) => Container(
-                color: Colors.grey[300],
-                child: const Center(
-                  child: Icon(Icons.broken_image, size: 60, color: Colors.grey),
+                color: AppColor.grey3,
+                child:  Center(
+                  child: Icon(Icons.broken_image, size: 60, color: AppColor.grey),
                 ),
               ),
             );
@@ -58,17 +59,17 @@ class ImageCarousel extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: AppColor.black.withOpacity(0.6),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.image, color: Colors.white, size: 16),
+                    const Icon(Icons.image, color: AppColor.white, size: 16),
                     const SizedBox(width: 4),
                     Text(
                       '${controller.currentIndex.value + 1}/${imageUrls.length}',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppColor.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

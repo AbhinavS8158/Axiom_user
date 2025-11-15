@@ -2,16 +2,17 @@
 import 'package:get/get.dart';
 import 'package:user/model/property_card_model.dart';
 import 'package:user/screens/booking/booking_page.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 Widget bottomButtons(Property property) {
  
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColor.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: AppColor.grey.withOpacity(0.3),
             blurRadius: 10,
             offset: const Offset(0, -3),
           ),
@@ -28,8 +29,8 @@ Widget bottomButtons(Property property) {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Colors.blue,
-                  disabledBackgroundColor: Colors.grey,
+                  backgroundColor: AppColor.blue,
+                  disabledBackgroundColor: AppColor.grey,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 child: Text(
@@ -37,7 +38,7 @@ Widget bottomButtons(Property property) {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: AppColor.white,
                   ),
                 ),
               ),

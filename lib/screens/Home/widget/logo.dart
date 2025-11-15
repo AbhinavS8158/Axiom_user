@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/screens/chat/chat.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class Logo extends StatelessWidget {
   const Logo({super.key});
@@ -15,7 +16,7 @@ class Logo extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 1),
+                  border: Border.all(color: AppColor.black, width: 1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(

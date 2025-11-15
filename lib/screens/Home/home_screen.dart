@@ -7,6 +7,7 @@ import 'package:user/screens/home/widget/rentpropertylistview.dart';
 import 'package:user/screens/home/widget/searchbar.dart';
 import 'package:user/screens/home/widget/sellpropertylistview.dart';
 import 'package:user/screens/home/widget/tabview.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
     final TabControllerX tabController = Get.put(TabControllerX());
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Column(
           children: [

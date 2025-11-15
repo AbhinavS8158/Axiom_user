@@ -6,6 +6,7 @@ import 'package:user/controller/login_controller.dart';
 import 'package:user/model/dashboad_model.dart';
 import 'package:user/screens/profile/widget/dashbord.dart';
 import 'package:user/screens/property/property_list.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 
 
@@ -15,7 +16,7 @@ class Profile extends StatelessWidget {
     final LoginController controller = Get.put(LoginController());
     User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: AppColor.grey1,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -26,7 +27,7 @@ class Profile extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColor.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -36,7 +37,7 @@ class Profile extends StatelessWidget {
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: AppColor.black,
                         shape: BoxShape.circle,
                       ),
                       child:
@@ -47,10 +48,10 @@ class Profile extends StatelessWidget {
                               )
                               : CircleAvatar(
                                 radius: 30,
-                                backgroundColor: Colors.black,
+                                backgroundColor: AppColor.black,
                                 child: Icon(
                                   Icons.person,
-                                  color: Colors.white,
+                                  color: AppColor.white,
                                   size: 30,
                                 ),
                               ),
@@ -75,7 +76,7 @@ class Profile extends StatelessWidget {
                                 : 'No email',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.grey[600],
+                              color: AppColor.grey6,
                             ),
                           ),
                           SizedBox(height: 4),
@@ -85,7 +86,7 @@ class Profile extends StatelessWidget {
                                 : 'no number ',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.grey[600],
+                              color: AppColor.grey6,
                             ),
                           ),
                           SizedBox(height: 4),
@@ -104,7 +105,7 @@ class Profile extends StatelessWidget {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color: AppColor.grey3,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
@@ -132,8 +133,8 @@ class Profile extends StatelessWidget {
                       model: DashboadModel(
                         title: 'Properties',
                         icon: Icons.business,
-                        color: Color(0xFFFFF8E1),
-                        borderColor: Colors.amber,
+                        color: AppColor.yellow,
+                        borderColor: AppColor.amber,
                         onTap: () =>Get.to(()=>PropertyList()),
                       ),
                     ),
@@ -143,8 +144,8 @@ class Profile extends StatelessWidget {
                       model: DashboadModel(
                         title: 'Transaction\nHistory',
                         icon: Icons.account_balance_wallet,
-                        color: Color(0xFFE1F5FE),
-                        borderColor: Colors.blue,
+                        color: AppColor.lightblue,
+                        borderColor: AppColor.blue,
                         onTap: () {},
                       ),
                     ),
@@ -153,8 +154,8 @@ class Profile extends StatelessWidget {
                       model: DashboadModel(
                         title: 'Settings',
                         icon: Icons.settings,
-                        color: Color(0xFFF3E5F5),
-                        borderColor: Colors.purple,
+                        color: AppColor.lightpruple,
+                        borderColor: AppColor.purple,
                         onTap: () {},
                       ),
                     ),
@@ -162,8 +163,8 @@ class Profile extends StatelessWidget {
                       model: DashboadModel(
                         title: "Logout",
                         icon: Icons.logout,
-                        color: Color.fromARGB(255, 234, 245, 229),
-                        borderColor: Colors.green,
+                        color: AppColor.lightgreen,
+                        borderColor: AppColor.checkcircle,
                         onTap: () => controller.logout(),
                       ),
                     ),

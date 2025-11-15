@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/controller/filter_controller.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class FilterBottomSheet extends StatelessWidget {
   const FilterBottomSheet({super.key});
@@ -15,7 +16,7 @@ class FilterBottomSheet extends StatelessWidget {
       return Container(
         height: MediaQuery.of(context).size.height * 0.75,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: AppColor.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
         ),
         child: Column(
@@ -26,7 +27,7 @@ class FilterBottomSheet extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: AppColor.grey3,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -143,10 +144,10 @@ class FilterBottomSheet extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColor.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: AppColor.black.withOpacity(0.05),
                     blurRadius: 10,
                     offset: const Offset(0, -2),
                   ),
@@ -162,7 +163,7 @@ class FilterBottomSheet extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        side: BorderSide(color: Colors.grey[300]!),
+                        side: BorderSide(color: AppColor.grey3!),
                       ),
                       child: const Text('Clear All'),
                     ),
@@ -178,8 +179,8 @@ class FilterBottomSheet extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
+                        backgroundColor: AppColor.blue,
+                        foregroundColor: AppColor.white,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -216,17 +217,17 @@ class FilterBottomSheet extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.blue : Colors.grey[200],
+          color: isSelected ? AppColor.blue : AppColor.grey2,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? Colors.blue : Colors.grey[300]!,
+            color: isSelected ? AppColor.blue : AppColor.grey3!,
             width: 1.5,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: isSelected ? Colors.white : Colors.grey[800],
+            color: isSelected ? AppColor.white : AppColor.grey8,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
           ),
         ),

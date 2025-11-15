@@ -13,7 +13,7 @@ class SearchScreen extends StatelessWidget {
     final AllPropertyController controller = Get.put(AllPropertyController());
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: AppColor.grey50,
       body: SafeArea(
         child: Column(
           children: [
@@ -41,8 +41,8 @@ class SearchScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF2196F3), Color(0xFF1976D2)],
+                        gradient:  LinearGradient(
+                          colors: [AppColor.bluegredient, AppColor.bluegredient1],
                         ),
                         borderRadius: BorderRadius.circular(15),
                       ),
@@ -53,9 +53,9 @@ class SearchScreen extends StatelessWidget {
                       child: TextField(
                         onChanged: (value) => controller.searchQuery.value = value,
                         style: const TextStyle(fontSize: 16),
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           hintText: 'Search cities...',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          hintStyle: TextStyle(color: AppColor.grey),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(vertical: 12),
                         ),
@@ -69,7 +69,7 @@ class SearchScreen extends StatelessWidget {
                         onTap: () => _showFilterBottomSheet(context),
                         child: Container(
                           padding: const EdgeInsets.all(10),
-                          child: Icon(Icons.tune, color: Colors.grey[700], size: 24),
+                          child: Icon(Icons.tune, color: AppColor.grey6, size: 24),
                         ),
                       ),
                     ),
@@ -91,7 +91,7 @@ class SearchScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColor.transparent,
       builder: (context) => const FilterBottomSheet(),
     );
   }

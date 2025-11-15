@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:user/model/property_card_model.dart';
 import 'package:user/screens/details/details.dart';
 import 'package:user/screens/home/widget/collection_type_banner.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class PropertyCard extends StatelessWidget {
   final Property property;
@@ -28,7 +29,7 @@ class PropertyCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: AppColor.grey.withOpacity(0.2),
               blurRadius: 5,
               offset: const Offset(0, 3),
             ),
@@ -48,17 +49,17 @@ class PropertyCard extends StatelessWidget {
                       errorBuilder: (context, error, stack) => Container(
                         height: 200,
                         width: double.infinity,
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.image_not_supported,
-                            color: Colors.grey, size: 40),
+                        color: AppColor.grey3,
+                        child:  Icon(Icons.image_not_supported,
+                            color: AppColor.grey, size: 40),
                       ),
                     )
                   : Container(
                       height: 200,
                       width: double.infinity,
-                      color: Colors.grey[300],
+                      color: AppColor.grey3,
                       child:
-                          const Icon(Icons.image, size: 50, color: Colors.grey),
+                           Icon(Icons.image, size: 50, color: AppColor.grey),
                     ),
             ),
 
@@ -70,13 +71,13 @@ class PropertyCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: isUnavailable ? Colors.red : Colors.green,
+                  color: isUnavailable ? AppColor.fav : AppColor.checkcircle,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Text(
                   isUnavailable ? 'UNAVAILABLE' : 'AVAILABLE',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppColor.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -92,7 +93,7 @@ class PropertyCard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: AppColor.white,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     bottomRight: Radius.circular(15),
@@ -120,16 +121,16 @@ class PropertyCard extends StatelessWidget {
                       children: [
                         if (property.bedrooms.isNotEmpty &&
                             property.bedrooms != '0') ...[
-                          const Icon(
+                           Icon(
                             Icons.king_bed_outlined,
                             size: 16,
-                            color: Colors.grey,
+                            color: AppColor.grey,
                           ),
                           const SizedBox(width: 5),
                           Text(
                             '${property.bedrooms} Beds',
-                            style: const TextStyle(
-                              color: Colors.grey,
+                            style:  TextStyle(
+                              color: AppColor.grey,
                               fontSize: 14,
                             ),
                           ),
@@ -144,10 +145,10 @@ class PropertyCard extends StatelessWidget {
                           ),
                         ),
                       isSellProperty?Text("/- only"):
-                          const Text(
+                           Text(
                             '/Month',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: AppColor.grey,
                               fontSize: 14,
                             ),
                           ),

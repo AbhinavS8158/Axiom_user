@@ -6,8 +6,10 @@ import 'package:user/screens/favourite/favourite.dart';
 import 'package:user/screens/home/home_screen.dart';
 import 'package:user/screens/profile/profile.dart';
 import 'package:user/screens/property/property_list.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class BottomNav extends StatelessWidget {
+  
   BottomNav({super.key});
 
   final BottomNavController controller = Get.put(BottomNavController());
@@ -35,8 +37,8 @@ class BottomNav extends StatelessWidget {
       /// ✅ Bottom bar - observe only index changes
       bottomNavigationBar: AnimatedNotchBottomBar(
         notchBottomBarController: controller.notchController,
-        color: Colors.white,
-        notchColor: Colors.blueAccent,
+        color: AppColor.white,
+        notchColor: AppColor.blueAccent,
         showLabel: true,
         itemLabelStyle: const TextStyle(
           fontWeight: FontWeight.w600,
@@ -48,25 +50,25 @@ class BottomNav extends StatelessWidget {
         durationInMilliSeconds: 250,
 
         /// ✅ Bottom bar items (static)
-        bottomBarItems: const [
+        bottomBarItems:  [
           BottomBarItem(
-            inActiveItem: Icon(Icons.home_outlined, color: Colors.grey),
-            activeItem: Icon(Icons.home, color: Colors.white),
+            inActiveItem: Icon(Icons.home_outlined, color: AppColor.grey),
+            activeItem: Icon(Icons.home, color: AppColor.white),
             itemLabel: 'Home',
           ),
           BottomBarItem(
-            inActiveItem: Icon(Icons.business_outlined, color: Colors.grey),
-            activeItem: Icon(Icons.business, color: Colors.white),
+            inActiveItem: Icon(Icons.business_outlined, color: AppColor.grey),
+            activeItem: Icon(Icons.business, color: AppColor.white),
             itemLabel: 'Property',
           ),
           BottomBarItem(
-            inActiveItem: Icon(Icons.favorite_border, color: Colors.grey),
-            activeItem: Icon(Icons.favorite, color: Colors.white),
+            inActiveItem: Icon(Icons.favorite_border, color: AppColor.grey),
+            activeItem: Icon(Icons.favorite, color: AppColor.white),
             itemLabel: 'Wishlist',
           ),
           BottomBarItem(
-            inActiveItem: Icon(Icons.person_outline, color: Colors.grey),
-            activeItem: Icon(Icons.person, color: Colors.white),
+            inActiveItem: Icon(Icons.person_outline, color: AppColor.grey),
+            activeItem: Icon(Icons.person, color: AppColor.white),
             itemLabel: 'Profile',
           ),
         ],

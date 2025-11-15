@@ -20,9 +20,9 @@ Widget buildDateSelector(BuildContext context) {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColor.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color:AppColor.grey3),
           ),
           child: Row(
             children: [
@@ -34,7 +34,7 @@ Widget buildDateSelector(BuildContext context) {
                     : '${date.day}/${date.month}/${date.year}',
                 style: TextStyle(
                   fontSize: 16,
-                  color: date == null ? AppColor.grey : Colors.black87,
+                  color: date == null ? AppColor.grey : AppColor.black,
                 ),
               ),
             ],

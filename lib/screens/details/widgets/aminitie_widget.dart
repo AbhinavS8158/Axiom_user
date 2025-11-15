@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:user/model/property_card_model.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class AmenitiesWidget extends StatelessWidget {
   final Property property;
 
-  const AmenitiesWidget({Key? key, required this.property}) : super(key: key);
+  const AmenitiesWidget({super.key, required this.property});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class AmenitiesWidget extends StatelessWidget {
     if (amenities.isEmpty) {
       return Text(
         'No amenities available',
-        style: TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
+        style: TextStyle(color: AppColor.grey6, fontStyle: FontStyle.italic),
       );
     }
 
@@ -23,22 +24,18 @@ class AmenitiesWidget extends StatelessWidget {
       children: amenities.map((amenity) {
         // ✅ Handle both Map and String formats
         String amenityName = '';
-        if (amenity is Map<String, dynamic>) {
-          amenityName = amenity['name']?.toString() ?? '';
-        } else if (amenity is String) {
-          amenityName = amenity.toString();
-        }
-
+        amenityName = amenity['name']?.toString() ?? '';
+      
         return Chip(
-          backgroundColor: Colors.blue[50],
+          backgroundColor: AppColor.blue,
           label: Text(
             amenityName,
-            style: const TextStyle(
+            style:  TextStyle(
               fontWeight: FontWeight.w500,
-              color: Colors.blue,
+              color: AppColor.blue,
             ),
           ),
-          avatar: const Icon(Icons.check_circle, color: Colors.blue, size: 16),
+          avatar:  Icon(Icons.check_circle, color: AppColor.blue, size: 16),
         );
       }).toList(),
     );

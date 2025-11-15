@@ -1,5 +1,6 @@
 class Property {
   final String id;
+  final String userId;
   final String title;
   final String location;
   final double latitude;
@@ -23,6 +24,7 @@ class Property {
 
   Property({
     required this.id,
+    required this.userId,
     required this.title,
     required this.location,
     required this.latitude,
@@ -90,6 +92,7 @@ class Property {
 
     return Property(
       id: documentId,
+      userId: data['uid']?? '',
       title: data['name'] ?? '',
       location: data['location'] ?? '',
       latitude: (data['latitude'] is num)

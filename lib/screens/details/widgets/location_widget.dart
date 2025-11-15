@@ -62,7 +62,7 @@ Widget buildLocationCard(Property property) {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.location_off, color: Colors.grey, size: 40),
+                 Icon(Icons.location_off, color: AppColor.grey, size: 40),
                 const SizedBox(height: 8),
                 Text(
                   'Unable to load map for:',
@@ -115,9 +115,9 @@ Widget buildLocationCard(Property property) {
                   point: LatLng(lat, lng),
                   width: 60,
                   height: 60,
-                  child: const Icon(
+                  child:  Icon(
                     Icons.location_pin,
-                    color: Colors.red,
+                    color: AppColor.fav,
                     size: 40,
                   ),
                 ),

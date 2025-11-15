@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user/model/property_card_model.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class Payment extends StatelessWidget {
   final Property property;
@@ -29,18 +30,18 @@ String _formatAmount(String amount) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: AppColor.grey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColor.black),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Payment',
           style: TextStyle(
-            color: Colors.black,
+            color: AppColor.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

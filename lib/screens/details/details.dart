@@ -5,6 +5,7 @@ import 'package:user/model/property_card_model.dart';
 import 'package:user/screens/details/widgets/aminitie_widget.dart';
 import 'package:user/screens/details/widgets/bottom_buttons.dart';
 import 'package:user/screens/details/widgets/build_feature_item.dart';
+import 'package:user/screens/details/widgets/buildowner_widget.dart';
 import 'package:user/screens/details/widgets/circle_button.dart';
 import 'package:user/screens/details/widgets/imagae_carousel.dart';
 import 'package:user/screens/details/widgets/location_widget.dart';
@@ -27,12 +28,11 @@ class Details extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // 🏞 App Bar with Image Carousel
+            // HEADER
             SliverAppBar(
               expandedHeight: 300,
               pinned: true,
               backgroundColor: AppColor.bg,
-              elevation: 0,
               leading: circleButton(
                 icon: Icons.arrow_back,
                 iconColor: AppColor.black,
@@ -43,7 +43,7 @@ class Details extends StatelessWidget {
                   final isFav = favController.isFavorite(property.id);
                   return circleButton(
                     icon: isFav ? Icons.favorite : Icons.favorite_border,
-                    iconColor: isFav ? AppColor.fav : Colors.black,
+                    iconColor: isFav ? AppColor.fav : AppColor.black,
                     onPressed: () => favController.toggleFavorite(property),
                   );
                 }),
@@ -51,10 +51,7 @@ class Details extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
                   children: [
-                    // 🖼 Image Carousel
                     ImageCarousel(imageUrls: property.imageUrl),
-        
-                    // 🏷 Availability Badge
                     Positioned(
                       top: 60,
                       right: 15,
@@ -64,8 +61,9 @@ class Details extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color:
-                              isUnavailable ? AppColor.fav : AppColor.checkcircle,
+                          color: isUnavailable
+                              ? AppColor.fav
+                              : AppColor.checkcircle,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
@@ -82,45 +80,36 @@ class Details extends StatelessWidget {
                 ),
               ),
             ),
-        
-            // 📋 Main Content
+
+            // MAIN CONTENT
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 🏡 Property Title
-                    Text(
-                      property.title,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text(property.title,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
-        
-                    // 💰 Price
+
                     Row(
                       children: [
-                        Text(
-                          property.price,
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: AppColor.blue,
-                          ),
-                        ),
-                        Text(
-                          '/Month',
-                          style: TextStyle(fontSize: 16, color: AppColor.grey),
-                        ),
+                        Text(property.price,
+                            style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: AppColor.blue)),
+                        Text('/Month',
+                            style: TextStyle(
+                                fontSize: 16, color: AppColor.grey)),
                       ],
                     ),
+
                     const SizedBox(height: 20),
-        
-                    // 🛏 Property Features
-                    if (property.bedrooms.isNotEmpty && property.bedrooms != '0')
+
+                    // FEATURES
+                    if (property.bedrooms.isNotEmpty)
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -130,106 +119,83 @@ class Details extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            buildFeatureItem(
-                              Icons.king_bed_outlined,
-                              property.bedrooms,
-                              'Bedrooms',
-                            ),
+                            buildFeatureItem(Icons.king_bed_outlined,
+                                property.bedrooms, 'Bedrooms'),
                             _divider(),
-                            buildFeatureItem(
-                              Icons.category_outlined,
-                              property.propertyType,
-                              'Type',
-                            ),
+                            buildFeatureItem(Icons.category_outlined,
+                                property.propertyType, 'Type'),
                             _divider(),
-                            buildFeatureItem(
-                              Icons.bathtub_outlined,
-                              property.bathrooms,
-                              'Bathrooms',
-                            ),
+                            buildFeatureItem(Icons.bathtub_outlined,
+                                property.bathrooms, 'Bathrooms'),
                           ],
                         ),
                       ),
+
                     const SizedBox(height: 24),
-        
-                    // 📝 Description
-                    detailselectionTile('Description',Icons.notes),
-                    Text(
-                      property.about,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: AppColor.grey2,
-                        height: 1.5,
-                      ),
-                    ),
+
+                    detailselectionTile('Description', Icons.notes),
+                    Text(property.about,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: AppColor.grey2,
+                            height: 1.5)),
                     const SizedBox(height: 24),
-        
-                    // 🏗 Construction Status (only for sell_property)
+
                     if (property.collectiontype == 'sell_property') ...[
-                      detailselectionTile("Construction Status",Icons.sync),
+                      detailselectionTile(
+                          "Construction Status", Icons.sync),
                       const SizedBox(height: 8),
-                      Text(
-                        property.constructionstatus,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: AppColor.grey2,
-                          height: 1.5,
-                        ),
-                      ),
-                     
+                      Text(property.constructionstatus,
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: AppColor.grey2,
+                              height: 1.5)),
                     ],
-                     if (property.collectiontype == 'pg_property') ...[
-                      detailselectionTile("Food availbility",Icons.restaurant),
+
+                    if (property.collectiontype == 'pg_property') ...[
+                      detailselectionTile(
+                          "Food Availability", Icons.restaurant),
                       const SizedBox(height: 8),
-                      Text(
-                        property.food,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: AppColor.grey2,
-                          height: 1.5,
-                        ),
-                      ),
-                     
+                      Text(property.food,
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: AppColor.grey2,
+                              height: 1.5)),
                     ],
-        
-        
+
                     const SizedBox(height: 24),
-        
-                    // ⚡ Power Backup
-                    detailselectionTile('Power Backup',Icons.electric_bolt),
-                    Text(
-                      property.powerbackup,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: AppColor.grey2,
-                        height: 1.5,
-                      ),
-                    ),
+
+                    detailselectionTile('Power Backup', Icons.electric_bolt),
+                    Text(property.powerbackup,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: AppColor.grey2,
+                            height: 1.5)),
                     const SizedBox(height: 24),
-        
-                    // ✨ Amenities
-                    detailselectionTile('Amenities',Icons.category),
+
+                    detailselectionTile('Amenities', Icons.category),
                     const SizedBox(height: 12),
                     AmenitiesWidget(property: property),
                     const SizedBox(height: 24),
-        
-                    // 📍 Location
-                    detailselectionTile('Location',Icons.location_on),
+
+                    detailselectionTile('Location', Icons.location_on),
                     const SizedBox(height: 12),
                     buildLocationCard(property),
-                    const SizedBox(height: 5,),
-                    Text(property.location,style: TextStyle(
-                      color: Colors.blueAccent,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold
-                    ),),
+                    const SizedBox(height: 5),
+                    Text(property.location,
+                        style: TextStyle(
+                            color: AppColor.blueAccent,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold)),
                     const SizedBox(height: 24),
-        
-                    // 👤 Owner Section
-                    detailselectionTile('Contact Owner',Icons.person),
+
+                    // OWNER INFO
+                    detailselectionTile( 'Contact Owner', Icons.person),
                     const SizedBox(height: 12),
-                    _buildOwnerSection(),
-                    const SizedBox(height: 100),
+
+                    buildOwnerSection(property.userId),
+
+                    const SizedBox(height: 120),
                   ],
                 ),
               ),
@@ -237,66 +203,11 @@ class Details extends StatelessWidget {
           ],
         ),
       ),
-
-      // 🛒 Bottom Buttons
       bottomNavigationBar: bottomButtons(property),
     );
   }
 
-  // 🔹 Divider
-  Widget _divider() => Container(height: 40, width: 1, color: Colors.grey[300]);
+  Widget _divider() =>
+      Container(height: 40, width: 1, color: AppColor.grey3);
 
-
- 
-
-
-
- 
-
-
-
-  // 🔹 Owner Info Section
-  Widget _buildOwnerSection() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColor.grey1,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: AppColor.blue1,
-            child: Icon(Icons.person, size: 30, color: AppColor.blue),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Real Estate Agent',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Contact for property details',
-                  style: TextStyle(color: AppColor.grey, fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.phone, color: AppColor.blue),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.message, color: AppColor.blue),
-            onPressed: () {},
-          ),
-        ],
-      ),
-    );
-  }
 }

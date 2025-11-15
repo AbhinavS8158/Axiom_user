@@ -2,6 +2,7 @@ import 'package:custom_sliding_segmented_control/custom_sliding_segmented_contro
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/controller/tabview_controller.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class TabView extends StatelessWidget {
   const TabView({super.key});
@@ -40,12 +41,12 @@ class TabView extends StatelessWidget {
             ),
           },
           decoration: BoxDecoration(
-            color: Colors.transparent,
+            color: AppColor.transparent,
             borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Colors.grey[300]!),
+            border: Border.all(color: AppColor.grey3!),
           ),
           thumbDecoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: AppColor.grey2,
             borderRadius: BorderRadius.circular(30),
           ),
           duration: const Duration(milliseconds: 200),

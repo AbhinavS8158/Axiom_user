@@ -10,7 +10,7 @@ Widget buildBottomBar(BuildContext context, Property property) {
 
   return Obx(() => Container(
         padding: const EdgeInsets.all(20),
-        color: Colors.white,
+        color: AppColor.white,
         child: ElevatedButton(
           onPressed: () async {
             bool ok = await controller.continueBooking(property);
@@ -21,7 +21,7 @@ Widget buildBottomBar(BuildContext context, Property property) {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor:
-                controller.agreeToTerms.value ? AppColor.blue : Colors.grey,
+                controller.agreeToTerms.value ? AppColor.blue : AppColor.grey,
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
           child: const Text(
