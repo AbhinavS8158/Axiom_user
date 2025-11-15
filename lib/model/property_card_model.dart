@@ -1,9 +1,9 @@
-
-
 class Property {
   final String id;
   final String title;
   final String location;
+  final double latitude;
+  final double longitude;
   final String price;
   final String type;
   final String bedrooms;
@@ -25,6 +25,8 @@ class Property {
     required this.id,
     required this.title,
     required this.location,
+    required this.latitude,
+    required this.longitude,
     required this.price,
     required this.type,
     required this.bedrooms,
@@ -43,12 +45,14 @@ class Property {
     required this.food,
   });
 
-  /// ✅ Convert to JSON
+  /// ✅ Convert to JSON (for saving)
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': title,
       'location': location,
+      'latitude': latitude,
+      'longitude': longitude,
       'amount': price,
       'propertyType': type,
       'bedroom': bedrooms,
@@ -62,8 +66,8 @@ class Property {
       'collectiontype': collectiontype,
       'powerbackup': powerbackup,
       'amenities': amenities,
-      'constructionstaus':constructionstatus,
-      'food':food,
+      'constructionstatus': constructionstatus,
+      'food': food,
     };
   }
 
@@ -78,9 +82,8 @@ class Property {
         if (rawList.first is Map) {
           parsedAmenities = List<Map<String, dynamic>>.from(rawList);
         } else if (rawList.first is String) {
-          parsedAmenities = rawList
-              .map((e) => {'name': e.toString()})
-              .toList(); // convert strings into map form
+          parsedAmenities =
+              rawList.map((e) => {'name': e.toString()}).toList();
         }
       }
     }
@@ -89,6 +92,12 @@ class Property {
       id: documentId,
       title: data['name'] ?? '',
       location: data['location'] ?? '',
+      latitude: (data['latitude'] is num)
+          ? (data['latitude'] as num).toDouble()
+          : 0.0,
+      longitude: (data['longitude'] is num)
+          ? (data['longitude'] as num).toDouble()
+          : 0.0,
       price: data['amount']?.toString() ?? '',
       type: data['propertyType'] ?? '',
       bedrooms: data['bedroom']?.toString() ?? '0',
@@ -105,8 +114,8 @@ class Property {
       collectiontype: data['collectiontype'] ?? '',
       powerbackup: data['powerbackup'] ?? '',
       amenities: parsedAmenities,
-      constructionstatus:  data['constructionstatus']??'',
-      food: data['food']??'',
+      constructionstatus: data['constructionstatus'] ?? '',
+      food: data['food'] ?? '',
     );
   }
 }

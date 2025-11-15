@@ -57,6 +57,25 @@ class FilterBottomSheet extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                     _buildFilterSection(
+                      'Type of Service ',
+                      Wrap(
+                        spacing: 5,
+                        runSpacing: 10,
+                        
+                        
+                        children: [ 'For rent','For sell', 'For Pg',]
+                            .map((service) => _buildSelectableChip(
+                                  service,
+                                  filter.services == service,
+                                  () => controller.updateTypeofService(
+                                    filter.services == service ? '' : service,
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                    SizedBox(height: 24,),
                     _buildFilterSection(
                       'Property Type',
                       Wrap(
@@ -83,11 +102,11 @@ class FilterBottomSheet extends StatelessWidget {
                         spacing: 10,
                         runSpacing: 10,
                         children: [
-                          '< ₹50000',
-                          '₹50000 - ₹100000',
-                          '₹100000 - ₹200000',
-                          '₹200000 - ₹500000',
-                          '> ₹500000'
+                          '< ₹50k',
+                          '₹50k - ₹1L',
+                          '₹1L - ₹2L',
+                          '₹2L - ₹5L',
+                          '> ₹5L'
                         ].map((range) => _buildSelectableChip(
                               range,
                               filter.priceRange == range,
@@ -104,7 +123,7 @@ class FilterBottomSheet extends StatelessWidget {
                       'Bedrooms',
                       Wrap(
                         spacing: 10,
-                        children: ['1', '2', '3', '4', '5+']
+                        children: ['1', '2', '3', '4', '5']
                             .map((bed) => _buildSelectableChip(
                                   bed,
                                   filter.bedrooms == bed,

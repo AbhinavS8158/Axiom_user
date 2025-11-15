@@ -5,16 +5,20 @@ import 'package:user/model/property_card_model.dart';
 class PgPropertyController extends GetxController{
   final FirebaseService _firebaseService =FirebaseService();
 
-  var propertyList=<Property>[].obs;
+  RxList<Property> propertyList=<Property>[].obs;
   @override
   void onInit(){
     super.onInit();
-    _listenToProperties();
+    _listenToPgProperties();
   }
-  void _listenToProperties(){
+  void _listenToPgProperties(){
     _firebaseService .fetchpgproperty().listen((properties){
       propertyList.value=properties;
     });
+  }
+  Future<void>refreshPgProperties()async{
+    await Future.delayed(const Duration(seconds: 1));
+    _listenToPgProperties();
   }
   
 }

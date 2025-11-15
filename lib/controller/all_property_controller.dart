@@ -6,21 +6,19 @@ import 'package:user/model/property_card_model.dart';
 class AllPropertyController extends GetxController {
   final FirebaseService _firebaseService = FirebaseService();
 
-  var propertyList = <Property>[].obs;     // All properties from Firestore
-  var filteredList = <Property>[].obs;     // Filtered + searched properties
-  var searchQuery = ''.obs;                // User search text
-  var activeFilter = FilterModel().obs;    // Currently applied filter
+  var propertyList = <Property>[].obs; // All properties from Firestore
+  var filteredList = <Property>[].obs; // Filtered properties
+  var searchQuery = ''.obs;
+  var activeFilter = FilterModel().obs;
 
   @override
   void onInit() {
     super.onInit();
     _listenToProperties();
-
-    // 🔄 Whenever search changes, re-apply filter and search logic together
     ever(searchQuery, (_) => _applyAllFilters());
   }
 
-  /// 🔥 Fetch all properties from Firestore in real-time
+  /// 🔥 Fetch all properties in real time
   void _listenToProperties() {
     _firebaseService.fetchAllProperties().listen((properties) {
       propertyList.assignAll(properties);
@@ -28,34 +26,54 @@ class AllPropertyController extends GetxController {
     });
   }
 
-  /// ✅ Search + Filter combined logic
+  /// ✅ Combined Search + Filter logic
   void _applyAllFilters() {
     List<Property> list = propertyList;
-
-    // Apply search filter (by location)
-    final query = searchQuery.value.trim().toLowerCase();
-    if (query.isNotEmpty) {
-      list = list.where((p) => p.location.toLowerCase().contains(query)).toList();
-    }
-
-    // Apply additional filters
     final filter = activeFilter.value;
 
-    // Property Type
+    // 🔍 Search by location
+    final query = searchQuery.value.trim().toLowerCase();
+    if (query.isNotEmpty) {
+      list = list
+          .where((p) => p.location.toLowerCase().contains(query))
+          .toList();
+    }
+
+    // 🏷️ Filter by Services (For rent / For sell / For Pg)
+    if (filter.services.isNotEmpty) {
+      list = list.where((p) {
+        final collection = p.collectiontype.toLowerCase();
+
+        // normalize the filter to match Firestore naming
+        if (filter.services.toLowerCase().contains('rent')) {
+          return collection.contains('rent');
+        } else if (filter.services.toLowerCase().contains('sell')) {
+          return collection.contains('sell');
+        } else if (filter.services.toLowerCase().contains('pg')) {
+          return collection.contains('pg');
+        }
+        return true;
+      }).toList();
+    }
+
+    // 🏢 Property Type filter
     if (filter.propertyType.isNotEmpty) {
       list = list
-          .where((p) => p.propertyType.toLowerCase() == filter.propertyType.toLowerCase())
+          .where((p) =>
+              p.propertyType.toLowerCase() ==
+              filter.propertyType.toLowerCase())
           .toList();
     }
 
-    // Bedrooms
+    // 🛏️ Bedrooms
     if (filter.bedrooms.isNotEmpty) {
       list = list
-          .where((p) => p.bedrooms.toLowerCase().contains(filter.bedrooms.toLowerCase()))
+          .where((p) =>
+              p.bedrooms.toLowerCase().contains(filter.bedrooms.toLowerCase()))
           .toList();
     }
 
-    // Price Range
+    // 💰 Price Range
     if (filter.priceRange.isNotEmpty) {
       list = _filterByPriceRange(list, filter.priceRange);
     }
@@ -63,7 +81,7 @@ class AllPropertyController extends GetxController {
     filteredList.assignAll(list);
   }
 
-  /// 🔍 Search only (for external triggers)
+  /// 🔍 Search by text
   void searchByLocation(String value) {
     searchQuery.value = value;
   }
@@ -74,11 +92,12 @@ class AllPropertyController extends GetxController {
     _applyAllFilters();
   }
 
-  /// 💰 Helper to filter price range
+  /// 💰 Helper to filter by price range
   List<Property> _filterByPriceRange(List<Property> list, String range) {
     try {
       return list.where((p) {
-        final price = double.tryParse(p.price.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+        final price =
+            double.tryParse(p.price.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
 
         switch (range) {
           case '< ₹50k':
@@ -107,3 +126,4 @@ class AllPropertyController extends GetxController {
     filteredList.assignAll(propertyList);
   }
 }
+ 

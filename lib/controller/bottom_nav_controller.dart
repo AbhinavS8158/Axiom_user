@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BottomNavController extends GetxController {
+
   final pageController = PageController(initialPage: 0);
   final notchController = NotchBottomBarController(index: 0);
   final RxInt selectedIndex = 0.obs;
@@ -10,6 +11,7 @@ class BottomNavController extends GetxController {
   void changePage(int index) {
     selectedIndex.value = index;
     pageController.jumpToPage(index);
+    notchController.index=index;
   }
 
   @override

@@ -5,6 +5,8 @@ import 'package:user/model/filter_model.dart';
 class FilterController extends GetxController {
   final filter = FilterModel().obs;
 
+ void updateTypeofService(String services)=>
+      filter.update((f)=> f!.services =services);
   void updatePropertyType(String type) =>
       filter.update((f) => f!.propertyType = type);
   void updatePriceRange(String range) =>

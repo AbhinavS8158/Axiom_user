@@ -7,6 +7,8 @@ import 'package:user/screens/details/widgets/bottom_buttons.dart';
 import 'package:user/screens/details/widgets/build_feature_item.dart';
 import 'package:user/screens/details/widgets/circle_button.dart';
 import 'package:user/screens/details/widgets/imagae_carousel.dart';
+import 'package:user/screens/details/widgets/location_widget.dart';
+import 'package:user/screens/details/widgets/selection_title.dart';
 import 'package:user/screens/utils/app_color.dart';
 
 class Details extends StatelessWidget {
@@ -22,210 +24,218 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          // 🏞 App Bar with Image Carousel
-          SliverAppBar(
-            expandedHeight: 300,
-            pinned: true,
-            backgroundColor: AppColor.bg,
-            elevation: 0,
-            leading: circleButton(
-              icon: Icons.arrow_back,
-              iconColor: AppColor.black,
-              onPressed: () => Navigator.pop(context),
-            ),
-            actions: [
-              Obx(() {
-                final isFav = favController.isFavorite(property.id);
-                return circleButton(
-                  icon: isFav ? Icons.favorite : Icons.favorite_border,
-                  iconColor: isFav ? AppColor.fav : Colors.black,
-                  onPressed: () => favController.toggleFavorite(property),
-                );
-              }),
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
-                children: [
-                  // 🖼 Image Carousel
-                  ImageCarousel(imageUrls: property.imageUrl),
-
-                  // 🏷 Availability Badge
-                  Positioned(
-                    top: 60,
-                    right: 15,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color:
-                            isUnavailable ? AppColor.fav : AppColor.checkcircle,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        isUnavailable ? 'UNAVAILABLE' : 'AVAILABLE',
-                        style: const TextStyle(
-                          color: AppColor.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            // 🏞 App Bar with Image Carousel
+            SliverAppBar(
+              expandedHeight: 300,
+              pinned: true,
+              backgroundColor: AppColor.bg,
+              elevation: 0,
+              leading: circleButton(
+                icon: Icons.arrow_back,
+                iconColor: AppColor.black,
+                onPressed: () => Navigator.pop(context),
+              ),
+              actions: [
+                Obx(() {
+                  final isFav = favController.isFavorite(property.id);
+                  return circleButton(
+                    icon: isFav ? Icons.favorite : Icons.favorite_border,
+                    iconColor: isFav ? AppColor.fav : Colors.black,
+                    onPressed: () => favController.toggleFavorite(property),
+                  );
+                }),
+              ],
+              flexibleSpace: FlexibleSpaceBar(
+                background: Stack(
+                  children: [
+                    // 🖼 Image Carousel
+                    ImageCarousel(imageUrls: property.imageUrl),
+        
+                    // 🏷 Availability Badge
+                    Positioned(
+                      top: 60,
+                      right: 15,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color:
+                              isUnavailable ? AppColor.fav : AppColor.checkcircle,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          isUnavailable ? 'UNAVAILABLE' : 'AVAILABLE',
+                          style: const TextStyle(
+                            color: AppColor.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-
-          // 📋 Main Content
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 🏡 Property Title
-                  Text(
-                    property.title,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+        
+            // 📋 Main Content
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 🏡 Property Title
+                    Text(
+                      property.title,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-
-                  // 💰 Price
-                  Row(
-                    children: [
+                    const SizedBox(height: 8),
+        
+                    // 💰 Price
+                    Row(
+                      children: [
+                        Text(
+                          property.price,
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: AppColor.blue,
+                          ),
+                        ),
+                        Text(
+                          '/Month',
+                          style: TextStyle(fontSize: 16, color: AppColor.grey),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+        
+                    // 🛏 Property Features
+                    if (property.bedrooms.isNotEmpty && property.bedrooms != '0')
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColor.grey1,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            buildFeatureItem(
+                              Icons.king_bed_outlined,
+                              property.bedrooms,
+                              'Bedrooms',
+                            ),
+                            _divider(),
+                            buildFeatureItem(
+                              Icons.category_outlined,
+                              property.propertyType,
+                              'Type',
+                            ),
+                            _divider(),
+                            buildFeatureItem(
+                              Icons.bathtub_outlined,
+                              property.bathrooms,
+                              'Bathrooms',
+                            ),
+                          ],
+                        ),
+                      ),
+                    const SizedBox(height: 24),
+        
+                    // 📝 Description
+                    detailselectionTile('Description',Icons.notes),
+                    Text(
+                      property.about,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: AppColor.grey2,
+                        height: 1.5,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+        
+                    // 🏗 Construction Status (only for sell_property)
+                    if (property.collectiontype == 'sell_property') ...[
+                      detailselectionTile("Construction Status",Icons.sync),
+                      const SizedBox(height: 8),
                       Text(
-                        property.price,
+                        property.constructionstatus,
                         style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: AppColor.blue,
+                          fontSize: 15,
+                          color: AppColor.grey2,
+                          height: 1.5,
                         ),
                       ),
-                      Text(
-                        '/Month',
-                        style: TextStyle(fontSize: 16, color: AppColor.grey),
-                      ),
+                     
                     ],
-                  ),
-                  const SizedBox(height: 20),
-
-                  // 🛏 Property Features
-                  if (property.bedrooms.isNotEmpty && property.bedrooms != '0')
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppColor.grey1,
-                        borderRadius: BorderRadius.circular(12),
+                     if (property.collectiontype == 'pg_property') ...[
+                      detailselectionTile("Food availbility",Icons.restaurant),
+                      const SizedBox(height: 8),
+                      Text(
+                        property.food,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: AppColor.grey2,
+                          height: 1.5,
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          buildFeatureItem(
-                            Icons.king_bed_outlined,
-                            property.bedrooms,
-                            'Bedrooms',
-                          ),
-                          _divider(),
-                          buildFeatureItem(
-                            Icons.category_outlined,
-                            property.propertyType,
-                            'Type',
-                          ),
-                          _divider(),
-                          buildFeatureItem(
-                            Icons.bathtub_outlined,
-                            property.bathrooms,
-                            'Bathrooms',
-                          ),
-                        ],
-                      ),
-                    ),
-                  const SizedBox(height: 24),
-
-                  // 📝 Description
-                  _sectionTitle('Description',Icons.notes),
-                  Text(
-                    property.about,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: AppColor.grey2,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // 🏗 Construction Status (only for sell_property)
-                  if (property.collectiontype == 'sell_property') ...[
-                    _sectionTitle("Construction Status",Icons.sync),
-                    const SizedBox(height: 8),
+                     
+                    ],
+        
+        
+                    const SizedBox(height: 24),
+        
+                    // ⚡ Power Backup
+                    detailselectionTile('Power Backup',Icons.electric_bolt),
                     Text(
-                      property.constructionstatus,
+                      property.powerbackup,
                       style: TextStyle(
                         fontSize: 15,
                         color: AppColor.grey2,
                         height: 1.5,
                       ),
                     ),
-                   
+                    const SizedBox(height: 24),
+        
+                    // ✨ Amenities
+                    detailselectionTile('Amenities',Icons.category),
+                    const SizedBox(height: 12),
+                    AmenitiesWidget(property: property),
+                    const SizedBox(height: 24),
+        
+                    // 📍 Location
+                    detailselectionTile('Location',Icons.location_on),
+                    const SizedBox(height: 12),
+                    buildLocationCard(property),
+                    const SizedBox(height: 5,),
+                    Text(property.location,style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                    ),),
+                    const SizedBox(height: 24),
+        
+                    // 👤 Owner Section
+                    detailselectionTile('Contact Owner',Icons.person),
+                    const SizedBox(height: 12),
+                    _buildOwnerSection(),
+                    const SizedBox(height: 100),
                   ],
-                   if (property.collectiontype == 'pg_property') ...[
-                    _sectionTitle("Food availbility",Icons.restaurant),
-                    const SizedBox(height: 8),
-                    Text(
-                      property.food,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: AppColor.grey2,
-                        height: 1.5,
-                      ),
-                    ),
-                   
-                  ],
-
-
-                  const SizedBox(height: 24),
-
-                  // ⚡ Power Backup
-                  _sectionTitle('Power Backup',Icons.electric_bolt),
-                  Text(
-                    property.powerbackup,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: AppColor.grey2,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // ✨ Amenities
-                  _sectionTitle('Amenities',Icons.category),
-                  const SizedBox(height: 12),
-                  AmenitiesWidget(property: property),
-                  const SizedBox(height: 24),
-
-                  // 📍 Location
-                  _sectionTitle('Location',Icons.location_on),
-                  const SizedBox(height: 12),
-                  _buildLocationCard(),
-                  const SizedBox(height: 24),
-
-                  // 👤 Owner Section
-                  _sectionTitle('Contact Owner',Icons.person),
-                  const SizedBox(height: 12),
-                  _buildOwnerSection(),
-                  const SizedBox(height: 100),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
 
       // 🛒 Bottom Buttons
@@ -236,47 +246,14 @@ class Details extends StatelessWidget {
   // 🔹 Divider
   Widget _divider() => Container(height: 40, width: 1, color: Colors.grey[300]);
 
-  // 🔹 Section Title Widget
-  Widget _sectionTitle(String title, IconData icon) => Row(
-  children: [
-    Icon(icon, size: 24),
-    const SizedBox(width: 8), // space between icon and text
-    Text(
-      title,
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ],
-);
+
+ 
 
 
-  // 🔹 Location Map Placeholder
-  Widget _buildLocationCard() {
-    return Container(
-      height: 180,
-      decoration: BoxDecoration(
-        color: AppColor.grey3,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.location_on, size: 48, color: AppColor.grey3),
-            const SizedBox(height: 8),
-            Text('Map View', style: TextStyle(color: AppColor.grey3)),
-            Text(
-              property.location,
-              style: TextStyle(color: AppColor.grey3),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
+ 
+
+
 
   // 🔹 Owner Info Section
   Widget _buildOwnerSection() {

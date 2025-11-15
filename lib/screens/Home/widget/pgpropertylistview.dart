@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user/controller/pg_property_controller.dart';
 import 'package:user/screens/home/widget/propertycard.dart';
+import 'package:user/screens/utils/app_color.dart';
 
 class Pgpropertylistview extends StatelessWidget {
    Pgpropertylistview({super.key});
@@ -23,7 +24,20 @@ final PgPropertyController controller  = Get.put(PgPropertyController());
           );
         }
 
-        return ListView.separated(
+        return RefreshIndicator(onRefresh: controller.refreshPgProperties,
+        color: AppColor.blue,
+        child: visibleProperties.isEmpty ? 
+        ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: const[
+            SizedBox(height: 250,),
+            Center(child:  Text('No availbale properties'),)
+          ],
+        )
+        
+
+       
+         : ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           itemCount: visibleProperties.length,
           separatorBuilder: (_, __) => const SizedBox(height: 15),
@@ -31,6 +45,7 @@ final PgPropertyController controller  = Get.put(PgPropertyController());
             final property = visibleProperties[index];
             return PropertyCard(property: property);
           },
+         ),
         );
       }),
     );

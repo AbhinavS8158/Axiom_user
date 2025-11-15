@@ -54,7 +54,7 @@ class SearchScreen extends StatelessWidget {
                         onChanged: (value) => controller.searchQuery.value = value,
                         style: const TextStyle(fontSize: 16),
                         decoration: const InputDecoration(
-                          hintText: 'Search properties...',
+                          hintText: 'Search cities...',
                           hintStyle: TextStyle(color: Colors.grey),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(vertical: 12),

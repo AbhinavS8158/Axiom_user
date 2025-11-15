@@ -7,7 +7,7 @@ class SellPropertyController extends GetxController {
   final FirebaseService _firebaseService = FirebaseService();
 
   // Observable list of properties
-  var propertyList = <Property>[].obs;
+  RxList<Property> propertyList = <Property>[].obs;
 
   @override
   void onInit() {
@@ -17,7 +17,11 @@ class SellPropertyController extends GetxController {
 
   void _listenToProperties() {
     _firebaseService.fetchsellproperty().listen((properties) {
-      propertyList.value = properties;
+      propertyList.assignAll(properties);
     });
+  }
+  Future<void>refreshSellProperties()async{
+    await Future.delayed(const Duration(seconds: 1));
+    _listenToProperties();
   }
 }
