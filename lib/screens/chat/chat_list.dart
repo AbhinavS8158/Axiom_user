@@ -9,12 +9,11 @@ class ChatList extends StatelessWidget {
 
   ChatList({super.key, required this.currentUserId});
 
-  final ChatListController controller = Get.put(ChatListController());
+  late final ChatListController controller = Get.put(ChatListController(currentUserId));
 
   @override
   Widget build(BuildContext context) {
-    /// ✅ correct initialization
-    controller.setUser(currentUserId);
+  
 
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
@@ -48,7 +47,7 @@ class ChatList extends StatelessWidget {
             final data = doc.data();
             final String providerId = data['providerId'];
             final String name = data['providerName'] ?? 'User';
-            final String lastMessage = data['lastMessage'] ?? '';
+            // final String lastMessage = data['lastMessage'] ?? '';
             final String photo = data['providerImage'];
             final Timestamp? ts = data['lastMessageAt'];
             final String time =
@@ -59,7 +58,7 @@ class ChatList extends StatelessWidget {
             return ChatListTile(
               photo: photo,
               name: name,
-              lastMessage: lastMessage,
+              // lastMessage: lastMessage,
               time: time,
               unreadCount: 0,
               onTap: () async {
@@ -93,7 +92,7 @@ class ChatList extends StatelessWidget {
 
 class ChatListTile extends StatelessWidget {
   final String name;
-  final String lastMessage;
+  // final String lastMessage;
   final String time;
   final int unreadCount;
   final VoidCallback onTap;
@@ -102,7 +101,7 @@ class ChatListTile extends StatelessWidget {
   const ChatListTile({
     super.key,
     required this.name,
-    required this.lastMessage,
+    // required this.lastMessage,
     required this.time,
     required this.unreadCount,
     required this.onTap,
@@ -155,12 +154,12 @@ class ChatListTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    lastMessage,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
-                  ),
+                  // Text(
+                  //   lastMessage,
+                  //   maxLines: 1,
+                  //   overflow: TextOverflow.ellipsis,
+                  //   style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                  // ),
                 ],
               ),
             ),

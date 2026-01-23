@@ -8,6 +8,7 @@ class ChatController extends GetxController {
   final TextEditingController messageController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final ScrollController scrollController = ScrollController();
 
   final RxList<ChatMessage> messages = <ChatMessage>[].obs;
 
@@ -78,7 +79,7 @@ class ChatController extends GetxController {
       'senderType': 'user',
       'createdAt': FieldValue.serverTimestamp(),
     });
-
+    Future.delayed(const Duration(milliseconds: 100), _scrollToBottom);
     await _firestore.collection('chats').doc(chatId).update({
       'lastMessage': text,
       'lastMessageAt': FieldValue.serverTimestamp(),
@@ -86,25 +87,39 @@ class ChatController extends GetxController {
   }
 
   // ---------------- LISTEN MESSAGES ----------------
-  void _listenMessages() {
-    _firestore
-        .collection('chats')
-        .doc(chatId)
-        .collection('messages')
-        .orderBy('createdAt')
-        .snapshots()
-        .listen((snapshot) {
-      messages.value = snapshot.docs.map((doc) {
-        final data = doc.data();
-         final Timestamp? ts = data['createdAt'];
-        return ChatMessage(
-          message: data['text'] ?? '',
-          isMe: data['senderId'] == _auth.currentUser!.uid,
-          time: ts != null ? ts.toDate() : DateTime.now(),
-        );
-      }).toList();
-    });
-  }
+ void _listenMessages() {
+  _firestore
+      .collection('chats')
+      .doc(chatId)
+      .collection('messages')
+      .orderBy('createdAt')
+      .snapshots()
+      .listen((snapshot) {
+    messages.value = snapshot.docs.map((doc) {
+      final data = doc.data();
+      final Timestamp? ts = data['createdAt'];
+
+      return ChatMessage(
+        message: data['text'] ?? '',
+        isMe: data['senderId'] == _auth.currentUser!.uid,
+        time: ts != null ? ts.toDate() : DateTime.now(),
+      );
+    }).toList();
+
+    /// 🔽 AUTO SCROLL AFTER UI UPDATE
+    Future.delayed(const Duration(milliseconds: 100), _scrollToBottom);
+  });
+}
+void _scrollToBottom() {
+  if (!scrollController.hasClients) return;
+
+  scrollController.animateTo(
+    scrollController.position.maxScrollExtent,
+    duration: const Duration(milliseconds: 300),
+    curve: Curves.easeOut,
+  );
+}
+
 
   // ---------------- CHAT ID ----------------
   String _generateChatId(String userId, String providerId) {
@@ -116,6 +131,7 @@ class ChatController extends GetxController {
   @override
   void onClose() {
     messageController.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 }

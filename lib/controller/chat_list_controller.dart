@@ -9,26 +9,23 @@ class ChatListController extends GetxController {
   final chats = <QueryDocumentSnapshot<Map<String, dynamic>>>[].obs;
   final isLoading = true.obs;
 
-  String? currentUserId;
+  late final String currentUserId;
   StreamSubscription? _chatSub;
 
-  /// Call this from UI
-  void setUser(String userId) {
-    if (currentUserId == userId) return; // ✅ guard
-    currentUserId = userId;
-    _listenChats();
+  /// Pass userId ONCE
+  ChatListController(this.currentUserId);
+
+  @override
+  void onInit() {
+    super.onInit();
+    _listenChats(); // ✅ called once
   }
 
-
   void _listenChats() {
-    if (currentUserId == null) return;
-
     isLoading.value = true;
-    _chatSub?.cancel();
 
     _chatSub = _firestore
         .collection('chats')
-        // ✅ IMPORTANT: filter only this user's chats
         .where('participants', arrayContains: currentUserId)
         .orderBy('lastMessageAt', descending: true)
         .snapshots()
@@ -37,7 +34,7 @@ class ChatListController extends GetxController {
         chats.assignAll(snapshot.docs);
         isLoading.value = false;
       },
-      onError: (e) {
+      onError: (_) {
         isLoading.value = false;
       },
     );
