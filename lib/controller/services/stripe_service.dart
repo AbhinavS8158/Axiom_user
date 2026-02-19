@@ -5,7 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:http/http.dart' as http;
-import 'package:user/constats.dart';
+import 'package:user/constant.dart';
 import 'package:user/screens/payment/payment_failed.dart';
 import 'package:user/screens/payment/payment_success.dart'; // stripeSecretKey here
 

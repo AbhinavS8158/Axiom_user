@@ -4,6 +4,7 @@ import 'package:user/controller/chat_controller.dart';
 import 'package:user/model/messaging_model.dart';
 import 'package:user/screens/chat/widget/chat_bubble.dart';
 import 'package:user/screens/chat/widget/chat_input.dart';
+import 'package:user/screens/utils/chat_date_helper.dart';
 
 class Chat extends StatelessWidget {
   // ---------------- OPTIONAL PARAMETERS ----------------
@@ -43,48 +44,7 @@ class Chat extends StatelessWidget {
 
     debugPrint('Chat opened with tag: $chatTag');
   }
-  bool _isNewDay(int index, List<ChatMessage> messages) {
-    if (index == 0) return true;
 
-    final current = messages[index].time;
-    final previous = messages[index - 1].time;
-
-    return current.year != previous.year ||
-        current.month != previous.month ||
-        current.day != previous.day;
-  }
-
-  String _formatDate(DateTime date) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final yesterday = today.subtract(const Duration(days: 1));
-    final messageDate = DateTime(date.year, date.month, date.day);
-
-    if (messageDate == today) return "Today";
-    if (messageDate == yesterday) return "Yesterday";
-
-    return "${date.day.toString().padLeft(2, '0')} "
-        "${_monthName(date.month)} "
-        "${date.year}";
-  }
-
-  String _monthName(int month) {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    return months[month - 1];
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +107,11 @@ class Chat extends StatelessWidget {
                 itemCount: controller.messages.length,
                 itemBuilder: (context, index) {
                   final ChatMessage msg = controller.messages[index];
-                  final bool showDate = _isNewDay(index, controller.messages);
+                  final bool showDate = ChatDateHelper.isNewDay(
+                    index: index,
+                    messageTimes:
+                        controller.messages.map((m) => m.time).toList(),
+                  );
 
                   return Column(
                     children: [
@@ -164,7 +128,7 @@ class Chat extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
-                              _formatDate(msg.time),
+                             ChatDateHelper.formatDate(msg.time),
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
