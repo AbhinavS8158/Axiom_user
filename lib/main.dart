@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:user/constats.dart';
+import 'package:user/constant.dart';
 import 'package:user/firebase_options.dart';
 
 import 'screens/splash_screen.dart';
