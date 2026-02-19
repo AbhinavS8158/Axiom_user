@@ -26,7 +26,7 @@ The application allows users to search properties, view complete details, save f
 
 Framework: Flutter
 Language: Dart
-State Management: Provider
+State Management: GetX
 Backend: Firebase
 Database: Cloud Firestore
 Media Storage: Cloudinary
