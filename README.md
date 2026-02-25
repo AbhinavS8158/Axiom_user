@@ -43,7 +43,7 @@ lib/
 
 ⚙️ Installation Guide
 Clone the repository:
-git clone https://github.com/yourusername/axiom-user-app.git
+git clone https://github.com/AbhinavS8158/axiom-user-app.git
 
 Navigate into the project:
 cd axiom-user-app
