@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: AppColor.bg,
       body: Center(
         child: Text(
-          'AXIOM',
+          'AXIOM',//title
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w900,

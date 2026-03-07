@@ -9,7 +9,7 @@ class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  /// 🔹 Fetch rent properties
+  ///  rent properties
   Stream<List<Property>> fetchproperty() {
     return _firestore
         .collection('rent_property')
@@ -21,7 +21,7 @@ class FirebaseService {
     });
   }
 
-  /// 🔹 Fetch sell properties
+  ///  sell properties
   Stream<List<Property>> fetchsellproperty() {
     return _firestore
         .collection('sell_property')
@@ -33,7 +33,7 @@ class FirebaseService {
     });
   }
 
-  /// 🔹 Fetch PG properties
+  // 🔹 Fetch PG properties
   Stream<List<Property>> fetchpgproperty() {
     return _firestore
         .collection('pg_property')
@@ -45,7 +45,7 @@ class FirebaseService {
     });
   }
 
-  /// ✅ Combined stream
+  ///  Combined stream
   Stream<List<Property>> fetchAllProperties() {
     return Rx.combineLatest3<
         List<Property>,
