@@ -22,7 +22,6 @@ class PersonalInformationSection extends StatelessWidget {
         sectionTitle('Personal Information'),
         const SizedBox(height: 16),
 
-        // Full Name
         buildTextField(
           controller: nameController,
           label: 'Full Name',
@@ -32,7 +31,6 @@ class PersonalInformationSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // Email
         buildTextField(
           controller: emailController,
           label: 'Email Address',
@@ -50,7 +48,6 @@ class PersonalInformationSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // Phone
         buildTextField(
           controller: phoneController,
           label: 'Phone Number',

@@ -17,7 +17,6 @@ class BookingPage extends StatelessWidget {
   final Property property;
   final BookingController controller = Get.put(BookingController());
 
-  // ✅ computed based on property.collectiontype
   final bool isSellProperty;
 
   BookingPage({super.key, required this.property})
@@ -46,7 +45,6 @@ class BookingPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Property Summary
             buildPropertySummary(property),
             Padding(
               padding: const EdgeInsets.all(20),
@@ -55,7 +53,6 @@ class BookingPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Personal information
                     PersonalInformationSection(
                       nameController: controller.nameController,
                       emailController: controller.emailController,
@@ -64,7 +61,6 @@ class BookingPage extends StatelessWidget {
 
                     const SizedBox(height: 16),
 
-                    // 👉 Rental details ONLY for non-sell properties
                     if (!isSellProperty) ...[
                       RentalDetailsSection(
                         dateSelectorBuilder:
@@ -75,7 +71,6 @@ class BookingPage extends StatelessWidget {
                       const SizedBox(height: 32),
                     ],
 
-                    // 👉 Advance payment ONLY for sell_property
                     if (isSellProperty) ...[
                       const Text(
                         "Advance Payment",
@@ -95,7 +90,7 @@ class BookingPage extends StatelessWidget {
                         ),
                         onChanged: (value) {
                           controller.advanceAmount.value =
-                              value.trim(); // ✅ SYNC
+                              value.trim(); 
                         },
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -112,19 +107,16 @@ class BookingPage extends StatelessWidget {
                       const SizedBox(height: 32),
                     ],
 
-                    // Additional message
                     AdditionalMessageSection(
                       messageController: controller.messageController,
                     ),
 
                     const SizedBox(height: 24),
 
-                    // Terms & conditions
                     buildTermsCheckbox(),
 
                     const SizedBox(height: 32),
 
-                    // Booking Summary
                     buildBookingSummary(property, isSellProperty),
 
                     const SizedBox(height: 100),
@@ -135,7 +127,6 @@ class BookingPage extends StatelessWidget {
           ],
         ),
       ),
-      // 👉 Pass property to bottom bar as before (we'll derive isSellProperty inside)
       bottomNavigationBar: buildBottomBar(context, property),
     );
   }

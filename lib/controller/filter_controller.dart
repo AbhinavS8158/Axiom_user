@@ -16,7 +16,7 @@ class FilterController extends GetxController {
 
   void clearAll() {
     filter.update((f) => f!.clear());
-    _applyFilters(); // Reset filter results
+    _applyFilters(); 
   }
 
   void applyFilters() {

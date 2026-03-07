@@ -15,7 +15,6 @@ class CollectionTypeBanner extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    // Extract the part before the underscore
     final displayText = collectionType.split('_').first;
 
     return Container(

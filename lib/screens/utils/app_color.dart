@@ -36,7 +36,6 @@ static final Color bluegredient=Color(0xFF2196F3);
 static final Color bluegredient1=Color(0xFF1976D2);
 static final Color lightgreen=Color.fromARGB(255, 234, 245, 229);
   static const orange = Color(0xFFFF9800);
-  // static const purple = Color(0xFF9C27B0);
 
 
 

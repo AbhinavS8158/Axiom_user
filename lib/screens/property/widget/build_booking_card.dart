@@ -32,10 +32,8 @@ Widget buildBookingCard(property, Booking? booking) {
     ),
     child: Column(
       children: [
-        // Property Card
         PropertyCard(property: property),
 
-        // Booking Status Banner
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
@@ -80,7 +78,6 @@ Widget buildBookingCard(property, Booking? booking) {
                     ),
                   ),
 
-                  // ✅ Show Pay Rent ONLY for non-sell properties
                 ],
               ),
               Row(
@@ -106,7 +103,6 @@ Widget buildBookingCard(property, Booking? booking) {
                   if (!isSellProperty)
                     TextButton(
                       onPressed: () {
-                        // Pay rent logic
                       },
                       style: TextButton.styleFrom(
                         foregroundColor: AppColor.primary,

@@ -33,7 +33,6 @@ class Favourite extends StatelessWidget {
             .where((p) => favController.isFavorite(p.id))
             .toList();
 
-        // ✅ EMPTY STATE WITH LOTTIE
         if (favoriteProps.isEmpty) {
           return Center(
             child: Column(

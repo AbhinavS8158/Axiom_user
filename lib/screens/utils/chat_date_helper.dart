@@ -1,5 +1,4 @@
 class ChatDateHelper {
-  /// Check if a message starts a new day section
   static bool isNewDay({
     required int index,
     required List<DateTime> messageTimes,
@@ -14,7 +13,6 @@ class ChatDateHelper {
         current.day != previous.day;
   }
 
-  /// Format date label (Today / Yesterday / Custom)
   static String formatDate(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);

@@ -23,7 +23,6 @@ class FilterBottomSheet extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Handle Bar
             Container(
               margin: const EdgeInsets.only(top: 12),
               width: 40,
@@ -34,7 +33,6 @@ class FilterBottomSheet extends StatelessWidget {
               ),
             ),
 
-            // Header
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(
@@ -53,7 +51,6 @@ class FilterBottomSheet extends StatelessWidget {
             ),
             const Divider(height: 1),
 
-            // Filters Content
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(20),
@@ -142,7 +139,6 @@ class FilterBottomSheet extends StatelessWidget {
               ),
             ),
 
-            // Bottom Actions
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(

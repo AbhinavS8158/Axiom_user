@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ChatBubble extends StatelessWidget {
   final String message;
   final bool isMe;
-  final String time; // ✅ NEW
+  final String time; 
 
   const ChatBubble({
     super.key,
@@ -38,7 +38,6 @@ class ChatBubble extends StatelessWidget {
               isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // ---------------- MESSAGE ----------------
             Text(
               message,
               style: TextStyle(
@@ -49,7 +48,6 @@ class ChatBubble extends StatelessWidget {
 
             const SizedBox(height: 4),
 
-            // ---------------- TIME ----------------
             Text(
               time,
               style: TextStyle(

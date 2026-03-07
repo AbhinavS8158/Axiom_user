@@ -49,7 +49,6 @@ class BookingListController extends GetxController {
     });
   }
 
-  /// ✅ Get booking document using propertyId
   Booking? getBookingByPropertyId(String propertyId) {
     try {
       return userBookings.firstWhere(

@@ -46,7 +46,6 @@ class Profilepick extends StatelessWidget {
             ),
           ),
 
-          // Optional loader overlay while uploading image
           if (controller.isLoading.value)
             Positioned.fill(
               child: Container(

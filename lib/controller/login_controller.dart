@@ -10,20 +10,17 @@ import '../screens/otp_screen.dart';
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // If needed, you can add scopes or clientId here
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: <String>[
       'email',
     ],
-    // clientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com', // only if required
   );
 
   final numberController = TextEditingController();
 
-  var isLoading = false.obs;        // for phone OTP button
-  var isGoogleLoading = false.obs;  // for Google button
+  var isLoading = false.obs;        
+  var isGoogleLoading = false.obs;  
 
-  // ------------------- PHONE OTP LOGIN -------------------
 
   void sendOtp(BuildContext context) async {
     String number = numberController.text.trim();
@@ -49,9 +46,7 @@ class LoginController extends GetxController {
       timeout: const Duration(seconds: 60),
 
       verificationCompleted: (PhoneAuthCredential credential) async {
-        // Optional: auto sign-in
-        // await _auth.signInWithCredential(credential);
-        // Get.offAll(() => BottomNav());
+       
       },
 
       verificationFailed: (FirebaseAuthException e) {
@@ -88,7 +83,6 @@ class LoginController extends GetxController {
     );
   }
 
-  // ------------------- GOOGLE SIGN-IN -------------------
 
   Future<User?> signInWithGoogle() async {
   try {
@@ -121,7 +115,6 @@ class LoginController extends GetxController {
       throw Exception('Firebase user is null after Google sign-in');
     }
 
-    /// ---------------- SAVE USER TO FIRESTORE ----------------
     final userRef = FirebaseFirestore.instance
         .collection('users')
         .doc(user.uid);
@@ -140,7 +133,6 @@ class LoginController extends GetxController {
         'role':'user'
       });
     }
-    /// -------------------------------------------------------
 
     Get.snackbar(
       "Success",
@@ -183,7 +175,7 @@ class LoginController extends GetxController {
 }
 
 
-  // ------------------- LOGOUT -------------------
+
 
   Future<void> logout() async {
     Get.defaultDialog(

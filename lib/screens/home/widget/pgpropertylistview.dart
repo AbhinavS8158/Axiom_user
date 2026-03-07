@@ -13,7 +13,6 @@ final PgPropertyController controller  = Get.put(PgPropertyController());
     return Expanded(
       child: Obx(() {
         final visibleProperties = controller.propertyList.where((p) {
-          // Hide properties where status == 2 or 'unavailable'
           final status = p.status.toString().trim().toLowerCase();
           final booking= p.bookingstatus.toString().trim().toLowerCase();
           return (status == '1' && booking !='booked');

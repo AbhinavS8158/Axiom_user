@@ -3,7 +3,7 @@
 Widget detailselectionTile(String title, IconData icon) => Row(
   children: [
     Icon(icon, size: 24),
-    const SizedBox(width: 8), // space between icon and text
+    const SizedBox(width: 8), 
     Text(
       title,
       style: const TextStyle(

@@ -7,7 +7,6 @@ import 'package:user/screens/utils/app_color.dart';
 Widget buildBookingSummary(Property property, bool isSellProperty) {
   final BookingController controller = Get.find<BookingController>();
 
-  // 👉 SELL property (reactive now)
   if (isSellProperty) {
     return Obx(() {
       final advance = controller.advanceAmount.value;
@@ -40,7 +39,6 @@ Widget buildBookingSummary(Property property, bool isSellProperty) {
     });
   }
 
-  // 👉 RENT / PG (unchanged)
   return Obx(
     () => Container(
       padding: const EdgeInsets.all(20),
@@ -82,7 +80,6 @@ Widget _summaryRow(String label, String value) {
         Text(label, style: TextStyle(color: AppColor.grey)),
         Row(
           children: [
-            // Show Rupee icon for money fields
             if (label.toLowerCase().contains('amount') ||
                 label.toLowerCase().contains('rent') ||
                 label.toLowerCase().contains('advance'))

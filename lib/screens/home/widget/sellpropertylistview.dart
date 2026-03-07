@@ -16,7 +16,7 @@ final SellPropertyController controller =Get.put(SellPropertyController());
         final visibleProperties = controller.propertyList.where((p) {
           final status = p.status.toString().trim().toLowerCase();
           final booking =p.bookingstatus.toString().trim().toLowerCase();
-          return status == '1'&& booking !='booked'; // only show available ones
+          return status == '1'&& booking !='booked';
         }).toList();
         if(visibleProperties.isEmpty){
           return Center(
@@ -28,9 +28,9 @@ final SellPropertyController controller =Get.put(SellPropertyController());
 
         return RefreshIndicator(
           color: AppColor.blue,
-          onRefresh: controller.refreshSellProperties, // 👈 add refresh handler
+          onRefresh: controller.refreshSellProperties, 
           child: visibleProperties.isEmpty
-              ? ListView( // Need ListView for RefreshIndicator to work
+              ? ListView( 
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: const [
                     SizedBox(height: 250),

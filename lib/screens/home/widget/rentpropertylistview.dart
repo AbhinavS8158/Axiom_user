@@ -17,17 +17,15 @@ class Rentpropertylistview extends StatelessWidget {
           final status = p.status.toString().trim().toLowerCase();
           final booking = p.bookingstatus.toString().trim().toLowerCase();
 
-          // ✅ show only approved AND not booked properties
           return status == '1' && booking != 'booked';
-          // or: return status == '1' && booking == 'not booked';
         }).toList();
 
 
         return RefreshIndicator(
           color: AppColor.blue,
-          onRefresh: controller.refreshProperties, // 👈 add refresh handler
+          onRefresh: controller.refreshProperties, 
           child: visibleProperties.isEmpty
-              ? ListView( // Need ListView for RefreshIndicator to work
+              ? ListView( 
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: const [
                     SizedBox(height: 250),

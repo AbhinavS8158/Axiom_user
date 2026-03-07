@@ -22,7 +22,6 @@ class FilterModel {
     };
   }
 
-  /// ✅ Create FilterModel from map
   factory FilterModel.fromMap(Map<String, dynamic> data, String documentId) {
     return FilterModel(
       services: data['services'] ?? '',

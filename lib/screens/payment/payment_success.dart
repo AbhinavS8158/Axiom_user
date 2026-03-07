@@ -8,10 +8,9 @@ class PaymentSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      // 🔹 Handle physical back button
       onWillPop: () async {
         Get.offAll(() => BottomNav());
-        return false; // ❌ Prevent default back action
+        return false; 
       },
       child: Scaffold(
         backgroundColor: Colors.green,
@@ -37,7 +36,6 @@ class PaymentSuccessPage extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: () {
-                  // 🔹 Button → Home
                   Get.offAll(() => BottomNav());
                 },
                 style: ElevatedButton.styleFrom(

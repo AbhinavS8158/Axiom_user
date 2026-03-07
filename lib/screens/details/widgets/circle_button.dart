@@ -4,9 +4,9 @@ import 'package:user/screens/utils/app_color.dart';
 Widget circleButton({
   required IconData icon,
   required VoidCallback onPressed,
-  Color? iconColor, // 👈 optional color for the icon
-  Color backgroundColor = AppColor.white, // 👈 optional background color
-  double size = 24, // 👈 customizable icon size
+  Color? iconColor, 
+  Color backgroundColor = AppColor.white, 
+  double size = 24, 
 }) {
   return Container(
     margin: const EdgeInsets.all(8),

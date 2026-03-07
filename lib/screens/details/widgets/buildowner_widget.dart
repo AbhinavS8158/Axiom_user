@@ -26,7 +26,7 @@ Widget buildOwnerSection(String id) {
       final data = snapshot.data!.data() as Map<String, dynamic>;
 
       return _ownerCard(
-        snapshot.data!.id,              // providerId
+        snapshot.data!.id,             
         data["profileImage"] ?? "",
         data["username"] ?? "Agent",
         data["phone"] ?? "",
@@ -35,7 +35,6 @@ Widget buildOwnerSection(String id) {
   );
 }
 
-// ---------------- OWNER CARD ----------------
 Widget _ownerCard(
   String providerId,
   String img,
@@ -115,7 +114,6 @@ Widget _ownerCard(
   );
 }
 
-// ---------------- OWNER NOT AVAILABLE ----------------
 Widget _ownerNotAvailable() {
   return Container(
     padding: const EdgeInsets.all(16),

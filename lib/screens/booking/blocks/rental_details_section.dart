@@ -21,11 +21,9 @@ class RentalDetailsSection extends StatelessWidget {
        isSellProperty?const SizedBox.shrink(): sectionTitle('Rental Details'),
        isSellProperty?const SizedBox(height: 1,): const SizedBox(height: 16),
 
-        // Date Selector
        isSellProperty? const SizedBox.shrink(): dateSelectorBuilder(context),
        isSellProperty?const SizedBox(height: 1,): const SizedBox(height: 16),
 
-        // Duration Selector (only if NOT selling)
         isSellProperty ? const SizedBox.shrink() : durationSelector,
       ],
     );

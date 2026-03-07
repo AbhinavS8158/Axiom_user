@@ -17,7 +17,6 @@ class SearchScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // 🔍 Search Bar Section
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -61,7 +60,6 @@ class SearchScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // Filter Button
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
@@ -79,7 +77,6 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
 
-            // 🏠 Property List
             Expanded(child: SearchItems()),
           ],
         ),

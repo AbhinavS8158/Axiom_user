@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TransactionHistory {
-  final String id; // document id
+  final String id; 
   final String bookingId;
   final String propertyId;
   final String propertyName;
   final String renterId;
   final String ownerId;
   final int amount;
-  final String paymentType; // advance | full
+  final String paymentType; 
   final String collectiontype;
-  final String status; // success
+  final String status; 
   final DateTime createdAt;
 
   TransactionHistory({
@@ -27,7 +27,6 @@ class TransactionHistory {
     required this.createdAt,
   });
 
-  /// 🔹 From Firestore document
   factory TransactionHistory.fromDoc(
     DocumentSnapshot<Map<String, dynamic>> doc,
   ) {
@@ -51,7 +50,6 @@ class TransactionHistory {
     );
   }
 
-  /// 🔹 To Firestore map
   Map<String, dynamic> toMap() {
     return {
       'bookingId': bookingId,

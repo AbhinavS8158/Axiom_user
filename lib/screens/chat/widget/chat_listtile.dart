@@ -31,7 +31,6 @@ class ChatListTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // ---------------- PROFILE IMAGE ----------------
             CircleAvatar(
               radius: 26,
               backgroundImage:
@@ -44,7 +43,6 @@ class ChatListTile extends StatelessWidget {
 
             const SizedBox(width: 12),
 
-            // ---------------- NAME & MESSAGE ----------------
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +72,6 @@ class ChatListTile extends StatelessWidget {
 
             const SizedBox(width: 8),
 
-            // ---------------- TIME & UNREAD ----------------
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

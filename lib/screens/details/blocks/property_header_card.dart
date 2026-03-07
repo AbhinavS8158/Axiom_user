@@ -28,7 +28,6 @@ class PropertyHeaderCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// STATUS CHIPS
           Row(
             children: [
               _statusChip(
@@ -45,7 +44,6 @@ class PropertyHeaderCard extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          /// PROPERTY TITLE
           Text(
             property.title,
             style: const TextStyle(
@@ -57,7 +55,6 @@ class PropertyHeaderCard extends StatelessWidget {
 
           const SizedBox(height: 6),
 
-          /// PRICE
           Row(
             children: [
               Icon(
@@ -85,7 +82,6 @@ class PropertyHeaderCard extends StatelessWidget {
 
           const SizedBox(height: 4),
 
-          /// LOCATION
           Text(
             property.location,
             style: TextStyle(
@@ -100,7 +96,6 @@ class PropertyHeaderCard extends StatelessWidget {
     );
   }
 
-  /// STATUS CHIP BUILDER
   Widget _statusChip(String label, IconData icon) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

@@ -6,7 +6,6 @@ import 'package:user/model/property_card_model.dart';
 class SellPropertyController extends GetxController {
   final FirebaseService _firebaseService = FirebaseService();
 
-  // Observable list of properties
   RxList<Property> propertyList = <Property>[].obs;
 
   @override

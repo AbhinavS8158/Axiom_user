@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:user/model/property_card_model.dart';
 
 class FavoritesController extends GetxController {
-  // store property IDs as String
   final RxList<String> favoriteIds = <String>[].obs;
 
   final _auth = FirebaseAuth.instance;
@@ -19,7 +18,6 @@ class FavoritesController extends GetxController {
     _loadFavoritesForCurrentUser();
   }
 
-  // 🔄 Load favorites for the currently logged-in user
   Future<void> _loadFavoritesForCurrentUser() async {
     if (_uid == null) {
       favoriteIds.clear();
@@ -34,13 +32,12 @@ class FavoritesController extends GetxController {
           .get();
 
       favoriteIds.assignAll(snapshot.docs.map((doc) => doc.id).toList());
-      favoriteIds.refresh(); // make sure UI updates
+      favoriteIds.refresh(); 
     } catch (e) {
       print('Error loading favorites: $e');
     }
   }
 
-  /// ❤️ Toggle favorite for current user
   Future<void> toggleFavorite(Property property) async {
   if (_uid == null) {
     Get.snackbar(
@@ -60,13 +57,11 @@ class FavoritesController extends GetxController {
       .doc(propertyId);
 
   if (isFavorite(propertyId)) {
-    // ❌ REMOVE FROM FAVORITES
     favoriteIds.remove(propertyId);
     favoriteIds.refresh();
 
     await favoriteDocRef.delete();
 
-    // ✅ SHOW SNACKBAR AFTER REMOVAL
     Get.snackbar(
       'Removed from Wishlist',
       '${property.title} removed successfully',
@@ -76,7 +71,6 @@ class FavoritesController extends GetxController {
       duration: const Duration(seconds: 2),
     );
   } else {
-    // ❤️ ADD TO FAVORITES
     favoriteIds.add(propertyId);
     favoriteIds.refresh();
 
@@ -87,7 +81,6 @@ class FavoritesController extends GetxController {
       'price': property.price,
     });
 
-    // (Optional) Snackbar for add
     Get.snackbar(
       'Added to Wishlist',
       '${property.title} added successfully',
@@ -100,12 +93,10 @@ class FavoritesController extends GetxController {
 }
 
 
-  /// ✅ Check if property is favorite for current user
   bool isFavorite(String propertyId) {
     return favoriteIds.contains(propertyId.toString());
   }
 
-  /// 🧹 Clear all favorites for current user
   Future<void> clearFavorites() async {
     if (_uid == null) return;
 

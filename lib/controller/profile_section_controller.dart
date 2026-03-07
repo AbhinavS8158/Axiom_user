@@ -9,7 +9,6 @@ import 'package:user/controller/cloudinary/cloudinary.dart';
 
 
 class ProfileSectionController extends GetxController {
-  // ---------------- STATE ----------------
   final isLoading = false.obs;
   final profileImageUrl = ''.obs;
 
@@ -22,7 +21,6 @@ class ProfileSectionController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   final CloudinaryService _cloudinaryService = CloudinaryService();
 
-  // ---------------- INIT ----------------
   void init(String phone) {
     nameController = TextEditingController();
     emailController = TextEditingController();
@@ -31,7 +29,6 @@ class ProfileSectionController extends GetxController {
     _loadUserData();
   }
 
-  // ---------------- LOAD USER ----------------
   Future<void> _loadUserData() async {
     final uid = _auth.currentUser?.uid;
     if (uid == null) return;
@@ -46,7 +43,6 @@ class ProfileSectionController extends GetxController {
     }
   }
 
-  // ---------------- PICK & UPLOAD IMAGE ----------------
   Future<void> pickAndUploadImage() async {
     final XFile? pickedImage =
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
@@ -72,7 +68,6 @@ class ProfileSectionController extends GetxController {
     }
   }
 
-  // ---------------- SAVE PROFILE ----------------
   Future<void> updateProfile() async {
   final uid = _auth.currentUser?.uid;
   if (uid == null) {
@@ -100,7 +95,6 @@ class ProfileSectionController extends GetxController {
       SetOptions(merge: true),
     );
 
-    // ✅ SUCCESS SNACKBAR
     Get.snackbar(
       'Success',
       'Profile updated successfully',
@@ -111,11 +105,9 @@ class ProfileSectionController extends GetxController {
       duration: const Duration(seconds: 2),
     );
 
-    // ✅ GO BACK AFTER SUCCESS
     Get.back();
 
   } catch (e) {
-    // ❌ FAILURE SNACKBAR
     Get.snackbar(
       'Update Failed',
       'Unable to update profile. Please try again.',
@@ -130,8 +122,7 @@ class ProfileSectionController extends GetxController {
   }
 }
 
-  // ---------------- DISPOSE ----------------
-  @override
+ @override
   void onClose() {
     nameController.dispose();
     emailController.dispose();

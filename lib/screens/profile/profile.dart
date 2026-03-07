@@ -24,7 +24,6 @@ class Profile extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // App Bar with gradient
             SliverAppBar(
               expandedHeight: 120,
               floating: false,
@@ -54,7 +53,6 @@ class Profile extends StatelessWidget {
               ),
             ),
 
-            // Content
             SliverList(
               delegate: SliverChildListDelegate([
                 Padding(
@@ -62,17 +60,13 @@ class Profile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Enhanced Profile Header
                      _buildProfileHeader(profileController),
 
 
-                      // SizedBox(height: 32),
 
-                      // Stats Section
-                      // _buildStatsSection(),
+                    
                       SizedBox(height: 32),
 
-                      // Section Title
                       Text(
                         'Quick Actions',
                         style: TextStyle(
@@ -84,12 +78,10 @@ class Profile extends StatelessWidget {
 
                       SizedBox(height: 16),
 
-                      // Dashboard Grid
                       _buildDashboardGrid(controller),
 
                       SizedBox(height: 32),
 
-                      // Additional Options
                       _buildAdditionalOptions(controller),
 
                       SizedBox(height: 20),
@@ -112,7 +104,6 @@ Widget _buildProfileHeader(ProfileController controller) {
     final firestoreUser = controller.user.value;
     final authUser = FirebaseAuth.instance.currentUser;
 
-    // ---------- FALLBACK VALUES ----------
     final String name =
         firestoreUser?.name.isNotEmpty == true
             ? firestoreUser!.name
@@ -141,7 +132,6 @@ Widget _buildProfileHeader(ProfileController controller) {
       ),
       child: Row(
         children: [
-          // Profile Image
           CircleAvatar(
             radius: 35,
             backgroundImage:
@@ -153,7 +143,6 @@ Widget _buildProfileHeader(ProfileController controller) {
 
           const SizedBox(width: 16),
 
-          // User Info
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,7 +174,6 @@ Widget _buildProfileHeader(ProfileController controller) {
             ),
           ),
 
-          // Edit Button (only useful if logged in)
           InkWell(
             onTap: () {
               Get.to(

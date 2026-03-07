@@ -29,7 +29,7 @@ class ChatInput extends StatelessWidget {
                 keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.newline,
                 minLines: 1,
-                maxLines: 5, // Adjust based on UX preference
+                maxLines: 5, 
                 decoration: InputDecoration(
                   hintText: "Type a message...",
                   filled: true,

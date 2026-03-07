@@ -9,7 +9,7 @@ Widget buildDurationSelector() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      // 🔹 Title
+     
       const Text(
         'Rental Duration',
         style: TextStyle(
@@ -20,7 +20,7 @@ Widget buildDurationSelector() {
       ),
       const SizedBox(height: 12),
 
-      // 🔹 Duration Chips
+   
       Obx(
         () => Wrap(
           spacing: 8,

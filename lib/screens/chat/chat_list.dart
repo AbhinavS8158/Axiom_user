@@ -47,7 +47,6 @@ class ChatList extends StatelessWidget {
             final data = doc.data();
             final String providerId = data['providerId'];
             final String name = data['providerName'] ?? 'User';
-            // final String lastMessage = data['lastMessage'] ?? '';
             final String photo = data['providerImage'];
             final Timestamp? ts = data['lastMessageAt'];
             final String time =
@@ -58,21 +57,18 @@ class ChatList extends StatelessWidget {
             return ChatListTile(
               photo: photo,
               name: name,
-              // lastMessage: lastMessage,
               time: time,
               unreadCount: 0,
               onTap: () async {
-                // 🔹 Mark chat as read / opened
                 await FirebaseFirestore.instance
                     .collection('chats')
                     .doc(doc.id)
                     .update({
                       'lastOpenedBy': currentUserId,
                       'lastOpenedAt': FieldValue.serverTimestamp(),
-                      'unreadCount_$currentUserId': 0, // optional pattern
+                      'unreadCount_$currentUserId': 0,
                     });
 
-                // 🔹 Navigate to chat screen
                 Get.to(
                   () => Chat(
                     chatId: doc.id,
@@ -92,7 +88,6 @@ class ChatList extends StatelessWidget {
 
 class ChatListTile extends StatelessWidget {
   final String name;
-  // final String lastMessage;
   final String time;
   final int unreadCount;
   final VoidCallback onTap;
@@ -101,7 +96,6 @@ class ChatListTile extends StatelessWidget {
   const ChatListTile({
     super.key,
     required this.name,
-    // required this.lastMessage,
     required this.time,
     required this.unreadCount,
     required this.onTap,
@@ -128,7 +122,6 @@ class ChatListTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // ---------------- AVATAR ----------------
             CircleAvatar(
               radius: 26,
               backgroundImage:
@@ -139,7 +132,6 @@ class ChatListTile extends StatelessWidget {
 
             const SizedBox(width: 12),
 
-            // ---------------- MESSAGE INFO ----------------
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,7 +156,6 @@ class ChatListTile extends StatelessWidget {
               ),
             ),
 
-            // ---------------- TIME + UNREAD ----------------
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

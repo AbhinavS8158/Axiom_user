@@ -13,7 +13,6 @@ class SearchItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final visibleProperties = controller.filteredList.where((p) {
-        // Hide unavailable ones
         final status = p.status.toString().trim().toLowerCase();
         return !(status == '2' || status == 'available');
       }).toList();

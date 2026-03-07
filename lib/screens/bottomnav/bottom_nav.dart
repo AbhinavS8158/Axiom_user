@@ -14,7 +14,6 @@ class BottomNav extends StatelessWidget {
 
   final BottomNavController controller = Get.put(BottomNavController());
 
-  /// ✅ Main pages for tabs
   final List<Widget> _pages = [
     HomeScreen(),
     PropertyList(),
@@ -27,14 +26,12 @@ class BottomNav extends StatelessWidget {
     return Scaffold(
       extendBody: true,
 
-      /// ✅ PageView controlled by GetX
       body: PageView(
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: _pages,
       ),
 
-      /// ✅ Bottom bar - observe only index changes
       bottomNavigationBar: AnimatedNotchBottomBar(
         notchBottomBarController: controller.notchController,
         color: AppColor.white,
@@ -49,7 +46,6 @@ class BottomNav extends StatelessWidget {
         elevation: 8.0,
         durationInMilliSeconds: 250,
 
-        /// ✅ Bottom bar items (static)
         bottomBarItems:  [
           BottomBarItem(
             inActiveItem: Icon(Icons.home_outlined, color: AppColor.grey),
@@ -73,7 +69,6 @@ class BottomNav extends StatelessWidget {
           ),
         ],
 
-        /// ✅ Reactively update index when tapped
         onTap: (index) => controller.changePage(index),
       ),
     );

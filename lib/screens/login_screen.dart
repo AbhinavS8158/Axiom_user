@@ -16,13 +16,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Use MediaQuery values once to avoid repeated calls
     final media = MediaQuery.of(context);
     final availableHeight = media.size.height - media.padding.top - media.padding.bottom;
 
     return Scaffold(
       backgroundColor: AppColor.bg,
-      // let scaffold resize when keyboard appears (default true) — keep it explicit
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Stack(
@@ -34,9 +32,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            // Make the content scrollable and ensure it fills available height
             SingleChildScrollView(
-              // add bottom padding to allow scrolling above keyboard
               padding: EdgeInsets.only(
                 left: 24,
                 right: 24,
@@ -45,7 +41,6 @@ class LoginScreen extends StatelessWidget {
               ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  // Ensure the scrollable content is at least the height of the viewport
                   minHeight: availableHeight,
                 ),
                 child: IntrinsicHeight(
@@ -56,7 +51,6 @@ class LoginScreen extends StatelessWidget {
                       const TitleText(label: "Login to Proceed"),
                       const SizedBox(height: 40),
 
-                      // Feature points
                       Row(
                         children: [
                           Icon(Icons.check_circle, color: AppColor.checkcircle),
@@ -81,7 +75,6 @@ class LoginScreen extends StatelessWidget {
 
                       const SizedBox(height: 36),
 
-                      // Phone input
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
@@ -107,7 +100,6 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 24),
 
-                      // Send OTP button with loading
                       Obx(() {
                         return SizedBox(
                           width: double.infinity,
@@ -116,7 +108,6 @@ class LoginScreen extends StatelessWidget {
                               ? Center(
                                   child: Lottie.network(
                                     'https://lottie.host/ca497732-421d-4a10-8bf5-1118a11baa2b/gt9Thho9OU.json',
-                                    // limit size so it doesn't overflow
                                     height: 48,
                                   ),
                                 )
@@ -144,7 +135,6 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
 
-                      // Google & Facebook login row
                       Obx(() {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -155,7 +145,6 @@ class LoginScreen extends StatelessWidget {
                                   : () async {
                                       final user = await controller.signInWithGoogle();
                                       if (user != null) {
-                                        // Only navigate when sign-in is successful
                                         Get.offAll(() => BottomNav());
                                       }
                                     },
@@ -183,7 +172,7 @@ class LoginScreen extends StatelessWidget {
                         );
                       }),
 
-                      const SizedBox(height: 16), // safe bottom spacing
+                      const SizedBox(height: 16), 
                     ],
                   ),
                 ),

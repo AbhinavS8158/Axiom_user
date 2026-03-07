@@ -10,24 +10,20 @@ class BookingController extends GetxController {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
-  // 🔹 Form key
   final formKey = GlobalKey<FormState>();
 
-  // 🔹 Text field controllers
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final messageController = TextEditingController();
   final advanceAmountController = TextEditingController();
 
-  // 🔹 Reactive variables
   var moveInDate = Rxn<DateTime>();
   var selectedDuration = '6 Months'.obs;
   var agreeToTerms = false.obs;
    final RxString advanceAmount = ''.obs;
    
 
-  // 🔹 Available durations
   final durations = [
     '3 Months',
     '6 Months',
@@ -36,7 +32,6 @@ class BookingController extends GetxController {
     'Long Term',
   ];
 
-  // 🔹 Date picker
   Future<void> selectMoveInDate(BuildContext context) async {
     final now = DateTime.now();
     final picked = await showDatePicker(
@@ -51,22 +46,18 @@ class BookingController extends GetxController {
     }
   }
 
-  // 🔹 Format date for display
   String get formattedMoveInDate {
     if (moveInDate.value == null) return 'Select move-in date';
     return DateFormat('dd MMM yyyy').format(moveInDate.value!);
   }
 
-  // 🔹 Toggle terms checkbox
   void toggleTerms(bool value) {
     agreeToTerms.value = value;
   }
 
-  /// 🔹 Step 1: Validate form + extras based on property type
   Future<bool> continueBooking(Property property) async {
     final bool isSellProperty = property.collectiontype == "sell_property";
 
-    // Validate form
     if (!formKey.currentState!.validate()) {
       Get.snackbar(
         "Form Incomplete",
@@ -77,7 +68,6 @@ class BookingController extends GetxController {
       return false;
     }
 
-    // ✅ For rent/pg → need move-in date
     if (!isSellProperty) {
       if (moveInDate.value == null) {
         Get.snackbar(
@@ -90,7 +80,6 @@ class BookingController extends GetxController {
       }
     }
 
-    // ✅ For sell_property → need valid advance amount
     if (isSellProperty) {
       final txt = advanceAmountController.text.trim();
       final advance = int.tryParse(txt) ?? 0;
@@ -105,7 +94,6 @@ class BookingController extends GetxController {
       }
     }
 
-    // Validate terms
     if (!agreeToTerms.value) {
       Get.snackbar(
         "Terms Required",
@@ -116,16 +104,14 @@ class BookingController extends GetxController {
       return false;
     }
 
-    return true; // ✅ proceed to payment
+    return true; 
   }
 
-  /// 🔹 Step 2: After payment success → save booking + mark property booked
   Future<void> confirmBookingAndMarkPropertyBooked(
     Property property, {
     required int paidAmount,
   }) async {
     try {
-      // Show loading
       Get.dialog(
         const Center(child: CircularProgressIndicator()),
         barrierDismissible: false,
@@ -136,7 +122,6 @@ class BookingController extends GetxController {
       final bool isSellProperty =
           property.collectiontype == "sell_property";
 
-      // 🧾 Save booking details
       final bookingRef =
       await _firestore.collection('bookings').add({
         'propertyId': property.id,
@@ -159,30 +144,27 @@ class BookingController extends GetxController {
       final bookingId = bookingRef.id;
 
     await _firestore.collection('transactions').add({
-  'bookingId': bookingId, // ✅ fixed typo
+  'bookingId': bookingId, 
   'propertyId': property.id,
   'propertyName': property.title,
-  'renterId': userId, // ✅ consistent with queries
+  'renterId': userId, 
   'ownerId': property.userId,
   'amount': paidAmount,
   'paymentType': isSellProperty ? 'advance' : 'full',
-  'collectiontype': property.collectiontype, // ✅ consistent
-  'status': 'success', // ✅ fixed typo
+  'collectiontype': property.collectiontype,
+  'status': 'success',
   'createdAt': FieldValue.serverTimestamp(),
-  'duration': isSellProperty ? null : selectedDuration.value, // optional
+  'duration': isSellProperty ? null : selectedDuration.value, 
 });
 
 
-      // 🏠 Update the correct property collection to mark as booked
       final collectionName = property.collectiontype;
       await _firestore.collection(collectionName).doc(property.id).update({
         'bookingstatus': 'booked',
       });
 
-      // Close loader
       Get.back();
 
-      // Success message
       Get.snackbar(
         "Booking Confirmed 🎉",
         "Your booking for ${property.title} is successful!",
@@ -192,10 +174,9 @@ class BookingController extends GetxController {
         duration: const Duration(seconds: 3),
       );
 
-      // Clear form fields
       clearForm();
     } catch (e) {
-      Get.back(); // close loader
+      Get.back();
       Get.snackbar(
         "Error",
         "Booking failed: $e",
@@ -212,7 +193,7 @@ class BookingController extends GetxController {
     if (renterId == null) return null;
 
     final querySnapshot = await _firestore
-        .collection('bookings') // ✅ CORRECT
+        .collection('bookings') 
         .where('propertyId', isEqualTo: propertyId)
         .where('renterId', isEqualTo: renterId)
         .where('bookingstatus', isEqualTo: 'booked')
@@ -234,8 +215,6 @@ class BookingController extends GetxController {
 }
 
 
-  /// 🔹 Step 3: Cancel booking → update booking + property status
- /// 🔹 Step 3: Cancel booking → show confirm dialog, then update booking + property status
 Future<void> cancelBooking({
   required BuildContext context,
   required String bookingId,
@@ -250,17 +229,17 @@ Future<void> cancelBooking({
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop(); // Close dialog
+            Navigator.of(context).pop();
           },
           child: const Text("No"),
         ),
        TextButton(
   onPressed: () async {
-    // 1️⃣ Close the dialog immediately
+
     Navigator.of(context).pop();
 
     try {
-      // 2️⃣ Update booking
+    
       await _firestore
           .collection('bookings')
           .doc(bookingId)
@@ -270,7 +249,7 @@ Future<void> cancelBooking({
         'cancelledAt': FieldValue.serverTimestamp(),
       });
 
-      // 3️⃣ Update property availability
+    
       await _firestore
           .collection(property.collectiontype)
           .doc(property.id)
@@ -278,7 +257,7 @@ Future<void> cancelBooking({
         'bookingstatus': 'not booked',
       });
 
-      // 4️⃣ Show snackbar (safe, native)
+    
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Booking cancelled successfully"),
@@ -287,7 +266,7 @@ Future<void> cancelBooking({
         ),
       );
 
-      // 5️⃣ Navigate to BottomNav → 2nd tab
+     
    Get.offAll(() => BottomNav());
 
     } catch (e) {
@@ -313,7 +292,6 @@ Future<void> cancelBooking({
 }
 
 
-  // 🔹 Clear all form data
   void clearForm() {
     nameController.clear();
     emailController.clear();

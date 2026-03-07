@@ -7,7 +7,7 @@ import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:http/http.dart' as http;
 import 'package:user/constant.dart';
 import 'package:user/screens/payment/payment_failed.dart';
-import 'package:user/screens/payment/payment_success.dart'; // stripeSecretKey here
+import 'package:user/screens/payment/payment_success.dart'; 
 
 class StripeService {
   StripeService._();
@@ -47,7 +47,7 @@ class StripeService {
       final fixedCurrency = currencyCode.toLowerCase().trim();
 
       final Map<String, String> body = {
-        'amount': _calculateAmount(amount), // ₹ -> paise
+        'amount': _calculateAmount(amount), 
         'currency': fixedCurrency,
         'payment_method_types[]': 'card',
       };
@@ -97,7 +97,6 @@ class StripeService {
   }
 
   String _calculateAmount(int amount) {
-    // amount = rupees → Stripe needs paise
     final calculatedAmount = amount * 100;
     return calculatedAmount.toString();
   }

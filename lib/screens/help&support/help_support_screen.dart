@@ -53,7 +53,6 @@ Future<void> _sendEmail() async {
             const SizedBox(height: 16),
            _buildEmailCard(),
             const SizedBox(height: 16),
-            // _buildCard()
            
           ],
         ),
@@ -61,7 +60,6 @@ Future<void> _sendEmail() async {
     );
   }
 
-  /// 📞 Customer Support with clickable phone number
   Widget _buildSupportCard() {
     return Container(
       padding: const EdgeInsets.all(16),

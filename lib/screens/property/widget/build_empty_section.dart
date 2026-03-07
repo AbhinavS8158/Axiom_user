@@ -22,7 +22,6 @@ Widget buildEmptySection(String title, String message, IconData icon) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Icon container for emphasis
         Container(
           height: 72,
           width: 72,
@@ -38,7 +37,6 @@ Widget buildEmptySection(String title, String message, IconData icon) {
         ),
         const SizedBox(height: 20),
 
-        // Title
         Text(
           title,
           textAlign: TextAlign.center,
@@ -50,7 +48,6 @@ Widget buildEmptySection(String title, String message, IconData icon) {
         ),
         const SizedBox(height: 8),
 
-        // Subtitle
         Text(
           message,
           textAlign: TextAlign.center,

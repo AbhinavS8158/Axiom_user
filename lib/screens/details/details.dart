@@ -22,10 +22,8 @@ import 'package:user/screens/utils/app_color.dart';
 class Details extends StatelessWidget {
   final Property property;
 
-  // ✅ Use existing FavoritesController (per-user favorites)
   final FavoritesController favController = Get.find<FavoritesController>();
 
-  // You can keep this as put or also use Get.find if already initialized
   final BookingController bookingController = Get.put(BookingController());
   final BookingListController bookingListController = Get.put(BookingListController());
 
@@ -42,7 +40,6 @@ class Details extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // 🔺 AppBar with favourite (heart) control
             PropertySliverAppBar(
               property: property,
               favController: favController,
@@ -96,7 +93,6 @@ class Details extends StatelessWidget {
         ),
       ),
 
-      // 🔻 Booking bottom bar
    bottomNavigationBar: Obx(() {
   final booking = bookingListController.getBookingByPropertyId(property.id);
 

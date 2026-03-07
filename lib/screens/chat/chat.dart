@@ -7,7 +7,6 @@ import 'package:user/screens/chat/widget/chat_input.dart';
 import 'package:user/screens/utils/chat_date_helper.dart';
 
 class Chat extends StatelessWidget {
-  // ---------------- OPTIONAL PARAMETERS ----------------
   final String? chatId;
   final String? providerId;
   final String? providerName;
@@ -25,16 +24,12 @@ class Chat extends StatelessWidget {
     this.providerImg,
     this.providerPhone,
   }) {
-    /// ✅ Always use chatId if available, otherwise fallback
     chatTag = chatId ?? providerId ?? UniqueKey().toString();
 
-    /// ✅ Create/Get controller with unique tag
     controller = Get.put(ChatController(), tag: chatTag);
 
-    /// ✅ Initialize chat only when providerId exists
     if (providerId != null) {
       controller.initChat(
-        // chatId: chatId ?? '',
         providerId: providerId!,
         providerName: providerName ?? 'User',
         providerPhone: providerPhone ?? '',
@@ -51,7 +46,6 @@ class Chat extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
-      // ---------------- APP BAR ----------------
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
@@ -86,10 +80,8 @@ class Chat extends StatelessWidget {
         ),
       ),
 
-      // ---------------- BODY ----------------
       body: Column(
         children: [
-          // ---------------- MESSAGE LIST ----------------
           Expanded(
             child: Obx(() {
               if (controller.messages.isEmpty) {
@@ -150,7 +142,6 @@ class Chat extends StatelessWidget {
             }),
           ),
 
-          // ---------------- INPUT ----------------
           ChatInput(controller: controller),
         ],
       ),

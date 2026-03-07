@@ -52,7 +52,6 @@ class ImageCarousel extends StatelessWidget {
               }).toList(),
         ),
 
-        // --- Image Counter ---
         Positioned(
           bottom: 10,
           right: 10,
@@ -75,7 +74,6 @@ class ImageCarousel extends StatelessWidget {
           }),
         ),
 
-        // --- Image Indicator Dots ---
         Positioned(
           bottom: 12,
           child: Obx(() {

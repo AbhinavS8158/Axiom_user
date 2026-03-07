@@ -19,7 +19,7 @@ class RentPropertyController extends GetxController {
   }
 
   Future<void> refreshProperties() async {
-    await Future.delayed(const Duration(seconds: 1)); // simulate refresh time
-    fetchProperties(); // re-listen to Firestore updates
+    await Future.delayed(const Duration(seconds: 1)); 
+    fetchProperties(); 
   }
 }

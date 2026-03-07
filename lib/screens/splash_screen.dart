@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Run navigation after first frame
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       navigateBasedOnAuth();
     });

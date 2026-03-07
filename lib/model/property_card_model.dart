@@ -52,7 +52,6 @@ class Property {
     required this.bookingstatus,
   });
 
-  /// ✅ Convert to JSON (for saving)
   Map<String, dynamic> toJson() {
     return {
       'id': id,

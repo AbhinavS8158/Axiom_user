@@ -14,14 +14,12 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Correct way: Initialize the controller once
     final OtpController controller = Get.put(OtpController(otp));
 
     return Scaffold(
       backgroundColor: AppColor.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          // Added scroll view to prevent overflow
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,8 +37,7 @@ class OtpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
 
-              // Wrap button in Obx to show loading state
-              // Inside OtpScreen build method
+              
               Obx(
                 () =>
                     controller.isLoading.value
@@ -49,7 +46,7 @@ class OtpScreen extends StatelessWidget {
                             padding: EdgeInsets.all(8.0),
                             child: CircularProgressIndicator(
                               color: AppColor.primary,
-                            ), // Use your primary color
+                            ), 
                           ),
                         )
                         : SubmitButton(

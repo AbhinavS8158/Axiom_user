@@ -77,9 +77,6 @@ return buildBookingCard(property, booking);
 
 
 
-          // return buildBookingCard(
-          //   controller.bookedProperties[index],
-          // );
         },
       ),
     ],

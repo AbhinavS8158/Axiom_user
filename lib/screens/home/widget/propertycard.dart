@@ -48,7 +48,6 @@ class PropertyCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            /// 🏞 Property Image
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: property.imageUrl.isNotEmpty
@@ -91,7 +90,6 @@ class PropertyCard extends StatelessWidget {
                     ),
             ),
 
-            /// ❤️ Favorite Icon (ONLY from favorites screen)
             if (showFavoriteIcon)
               Positioned(
                 top: 15,
@@ -117,7 +115,6 @@ class PropertyCard extends StatelessWidget {
                 }),
               ),
 
-            /// 🏷 Availability Badge
             Positioned(
               top: 15,
               left: 15,
@@ -140,7 +137,6 @@ class PropertyCard extends StatelessWidget {
               ),
             ),
 
-            /// 📄 Property Details
             Positioned(
               bottom: 0,
               left: 0,

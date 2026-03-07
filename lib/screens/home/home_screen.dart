@@ -30,11 +30,11 @@ final TabControllerX tabController = Get.put(TabControllerX());
               child: Obx(() {
                 switch (tabController.selectedIndex.value) {
                   case 0:
-                    return Rentpropertylistview(); // RENT
+                    return Rentpropertylistview(); 
                   case 1:
-                    return Sellpropertylistview(); // BUY
+                    return Sellpropertylistview();
                   case 2:
-                    return Pgpropertylistview(); // PG
+                    return Pgpropertylistview(); 
                   default:
                     return const Center(
                       child: Text('Unknown Tab'),

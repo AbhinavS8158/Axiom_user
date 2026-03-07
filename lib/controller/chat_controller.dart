@@ -15,7 +15,6 @@ class ChatController extends GetxController {
   late String chatId;
   bool _initialized = false;
 
-  // ---------------- INIT CHAT ----------------
   Future<void> initChat({
     required String providerId,
     required String providerName,
@@ -31,7 +30,6 @@ class ChatController extends GetxController {
     final userId = user.uid;
     chatId = _generateChatId(userId, providerId);
 
-    // 🔹 FETCH CURRENT USER DETAILS
     final userDoc =
         await _firestore.collection('users').doc(userId).get();
 
@@ -41,7 +39,6 @@ class ChatController extends GetxController {
     final String userPhone = userData['phone'] ?? '';
     final String userImage = userData['profileImage'] ?? '';
 
-    // 🔹 CREATE / UPDATE CHAT DOCUMENT
     await _firestore.collection('chats').doc(chatId).set({
       'providerId': providerId,
       'providerName': providerName,
@@ -61,7 +58,6 @@ class ChatController extends GetxController {
     _listenMessages();
   }
 
-  // ---------------- SEND MESSAGE ----------------
   Future<void> sendMessage() async {
     final text = messageController.text.trim();
     if (text.isEmpty) return;
@@ -86,7 +82,6 @@ class ChatController extends GetxController {
     });
   }
 
-  // ---------------- LISTEN MESSAGES ----------------
  void _listenMessages() {
   _firestore
       .collection('chats')
@@ -106,7 +101,6 @@ class ChatController extends GetxController {
       );
     }).toList();
 
-    /// 🔽 AUTO SCROLL AFTER UI UPDATE
     Future.delayed(const Duration(milliseconds: 100), _scrollToBottom);
   });
 }
@@ -121,7 +115,6 @@ void _scrollToBottom() {
 }
 
 
-  // ---------------- CHAT ID ----------------
   String _generateChatId(String userId, String providerId) {
     return userId.compareTo(providerId) < 0
         ? '${userId}_$providerId'

@@ -18,7 +18,6 @@ class AmenityIcons {
     'Washing Machine': Icons.local_laundry_service,
   };
 
-  /// fallback icon
   static IconData getIcon(String amenityName) {
     return amenityMap[amenityName] ?? Icons.check_circle;
   }
